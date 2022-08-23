@@ -1,16 +1,17 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-    <custom-button :title="Continue"></custom-button>
+    <header-component></header-component>
+    <custom-button title="Continue"></custom-button>
   </div>
 </template>
 
 
 <script>
 import CustomButton from "../components/CustomButton.vue";
+import HeaderComponent from '../components/Header.vue';
   export default{
     //name: "About",
-    components: {CustomButton}
+    components: {CustomButton, HeaderComponent}
     
   }
 </script>
