@@ -26,6 +26,7 @@
                     subtitleOne="Dis enim pulvinar ornare integer"
                     subtitleTwo="integer aliquam purus ultrices."
                     color="#DEEFFF"
+                    @click="$router.push('/getStarted')"
     >
     </card-component>
     <br>
@@ -50,6 +51,14 @@ export default {
     HeaderComponent,
     CardComponent,
     PolicyCard
+  },
+  data(){
+    return{
+
+    }
+  },
+  methods: {
+    
   }
 }
 </script>

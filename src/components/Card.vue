@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-12 px-3">
-        <b-card class="py-2"  :style="{backgroundColor:color}">
+        <b-card class="py-2"  :style="{backgroundColor:color}" @click="$emit('click')">
             <div class="row px-3">
                 <div>
                     <img :src="require(`../assets/${leadingIcon}`)">

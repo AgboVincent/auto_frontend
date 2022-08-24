@@ -1,6 +1,6 @@
 <template>
-    <div class="col-md-12">
-        <button class="mt-5 py-2 col-md-3 custom-button">{{title}}</button>
+    <div class="fixed-bottom col-md-12 mb-5">
+        <button @click="$emit('click')" class="mt-5 py-2 col-md-3 custom-button">{{title}}</button>
     </div>
 </template>
 
