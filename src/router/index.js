@@ -7,6 +7,9 @@ import InspectionSteps from '../views/InspectionSteps.vue'
 import UploadOptions from '../views/UploadOptions.vue'
 import InspectionReport from '../views/InspectionReport.vue'
 import BuyPolicy from '../views/BuyPolicy.vue'
+import InsuranceReview from '../views/InsuranceReview.vue'
+import PaymentType from '../views/PaymentType.vue'
+import CardPayment from '../views/CardPayment.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +48,21 @@ const routes = [
     path: '/buyPolicy',
     name: 'buyPolicy',
     component: BuyPolicy
+  },
+  {
+    path: '/insuranceReview',
+    name: 'insuranceReview',
+    component: InsuranceReview
+  },
+  {
+    path: '/paymentType',
+    name: 'paymentType',
+    component: PaymentType
+  },
+  {
+    path: '/cardPayment',
+    name: 'cardPayment',
+    component: CardPayment
   },
 ]
 
