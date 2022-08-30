@@ -7,6 +7,9 @@
                      <img class="pb-1 pr-2" src="../assets/arrow_back.png"> Back
                    </button>
              </div>
+             <page-description title="Steps on inspecting your vehicle"
+                               subtitle="Follow the instructions below">
+             </page-description>
              <b-card>
                  <div class="col">
                      <div class="row px-3">
@@ -14,7 +17,7 @@
                             <img src="../assets/coin.png">
                         </div>
                         <div class="col">
-                            <h6 class="d-flex align-items-start">Make sure the environment for capture is well lit.</h6>
+                            <h6  class="d-flex align-items-start text-wrap">Make sure the environment for capture is well lit.</h6>
                         </div>
                     </div>
                     <div class="row px-3 py-3">
@@ -38,7 +41,7 @@
                             <img src="../assets/coin.png">
                         </div>
                         <div class="col">
-                            <h6 class="d-flex align-items-start">Capture images of your VIN (Vehicle Inspection Number) and the Chassis number.</h6>
+                            <h6 class="d-flex align-items-start text-wrap">Capture images of your VIN (Vehicle Inspection Number) and the Chassis number.</h6>
                         </div>
                     </div>
                      <div class="row px-3 py-3">
@@ -68,11 +71,13 @@
 <script>
 import HeaderComponent from '@/components/Header.vue'
 import CustomButton from "../components/CustomButton.vue";
+import PageDescription from "@/components/PageDescription.vue";
 export default {
      name:"InspectionSteps",
      components: {
          HeaderComponent,
-         CustomButton
+         CustomButton,
+         PageDescription
      },
      data(){
          return{
