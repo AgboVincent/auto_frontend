@@ -14,13 +14,13 @@
               </b-card>
               <br>
               <b-row class="justify-content-between px-3">
-                  <b-card class="md">
+                  <b-card class="md w-50">
                       <h6 class="d-flex align-items-start">Expiration Date</h6>
                       <div class="input-group input-group-md">
                             <input placeholder="MM/YY" type="text" class="form-control" aria-label="Sizing example input" >
                       </div>
                   </b-card>
-                  <b-card class="md">
+                  <b-card class="md w-50">
                       <h6 class="d-flex align-items-start">CCV</h6>
                       <div class="input-group input-group-md">
                             <input placeholder="CCV" type="text" class="form-control" aria-label="Sizing example input" >
