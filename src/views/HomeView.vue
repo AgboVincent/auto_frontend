@@ -3,7 +3,7 @@
     <header-component title="Dashboard"></header-component>
     <br>
     <div class="px-3">
-      <h6 class="d-flex align-items-start">Hello there</h6> 
+      <h4 style="color: #030124;" class="d-flex align-items-start">Hello there,</h4> 
       <span class="d-flex align-items-start">Welcome to Curacel Auto</span>
     </div>
     <br>

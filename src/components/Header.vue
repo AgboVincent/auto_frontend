@@ -1,8 +1,8 @@
 <template>
     <div>
-       <div class="pos-f-t px-3 py-2">
+       <div class="px-3 py-2">
         <nav class="container-fluid-nav navbar navbar-light bg-light">
-            <h5 class="d-flex text-align-center">{{title}}</h5>
+            <h5 class="d-flex text-center">{{title}}</h5>
         </nav>
       </div>
     </div>   
