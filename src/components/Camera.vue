@@ -22,7 +22,7 @@ export default {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
                 video:{facingMode: { exact: 'environment' }} , audio: false,
-                //constraints: {facingMode: { exact: 'environment' }} 
+
             }).then(stream => {
                 this.video.srcObject = stream;
                 this.video.play();

@@ -45,7 +45,6 @@
 import HeaderComponent from '@/components/Header.vue'
 import CardComponent from  '@/components/Card.vue';
 import PolicyCard from  '@/components/PolicyCard.vue';
-import {Axios} from '@/network/axios'
 export default {
   name: 'HomeView',
   components: {
@@ -63,10 +62,7 @@ export default {
     
   },
   mounted(){
-    Axios.get('accident/types').then(respons =>{
-      console.log(respons)
-      }
-    ).catch(e => console.log(e))
+    
   }
 }
 </script>
