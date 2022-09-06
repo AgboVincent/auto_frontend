@@ -21,7 +21,8 @@ export default {
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video:true, audio: false
+                video:true, audio: false,
+                constraints: {facingMode: { exact: 'environment' }} 
             }).then(stream => {
                 this.video.srcObject = stream;
                 this.video.play();
@@ -30,8 +31,8 @@ export default {
             })
         },
         initCanvas(){
-            this.canvas.setAttributes('width', this.video.videoWidth);
-            this.canvas.setAttributes('height', this.video.videoHeight)
+            this.canvas.setAttribute('width', this.video.videoWidth);
+            this.canvas.setAttribute('height', this.video.videoHeight)
         },
         takePicture(){
             let context = this.canvas.getContext('2d');
