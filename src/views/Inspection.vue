@@ -58,19 +58,12 @@
                     <option v-for="color in colors" :key="color.id" :value="color">{{color}}</option>  
                 </select>
                 </div>
-               <!-- <div class="input-group mb-3">
-                <select v-model="data.chassis_number" class="custom-select" id="inputGroupSelect01">
-                    <option :value="data.id" disabled >Enter VIN or chasis number</option>
-                    <option value="one">One</option>
-                    <option value="two">Two</option>
-                    <option value="three">Three</option>
-                </select>
-                </div> -->
-                <custom-button @click="submitVehicleDetails()" title="Continue"></custom-button>
+        
+                <custom-button @click="$router.push('/inspectionSteps')" title="Continue"></custom-button>
         </div>
     </div>
 </template>
-
+//submitVehicleDetails()
 //$router.push('/inspectionSteps')
 <script>
 import HeaderComponent from '@/components/Header.vue'

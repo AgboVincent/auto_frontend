@@ -62,7 +62,6 @@
                     </div>
                  </div>
              </b-card>
-             <br><br>
              <custom-button @click="$router.push('/uploadOptions')" title="Continue"></custom-button>
         </div>     
     </div>
