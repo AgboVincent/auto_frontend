@@ -120,8 +120,13 @@ export default {
             this.preEvaluation.submitVehicleDetails(this.data)
             .then(response => {
                 console.log(response);
-                //alert('Information submitted successfull');
                 showSuccess('information submitted successfull')
+                setInterval(
+                function () {
+                    this.$router.push('/inspectionSteps')
+                }.bind(this),
+                1500
+            );
             })
             .catch(e => {
                 console.log(e)
