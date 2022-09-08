@@ -3,11 +3,14 @@
         <div v-if="openCamera">
             <camera-component></camera-component>
         </div>
+        <div v-else-if="openVideo">
+            <video-component></video-component>
+        </div>
         <div v-else>
             <header-component title="Vehicle Inspection"></header-component>
             <div class="col">
                 <back-button></back-button>
-                <b-card class="card-style mb-3">
+                <b-card class="card-style mb-3"  @click="openVideo = true">
                     <div class="row px-3">
                         <input class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
                         <h6>Video recording of your vehicle</h6>
@@ -55,18 +58,20 @@ import HeaderComponent from '@/components/Header.vue'
 import CustomButton from "@/components/CustomButton.vue";
 import BackButton from "@/components/BackButton.vue";
 import CameraComponent from "@/components/Camera.vue";
+import VideoComponent from "@/components/Video.vue";
 export default {
     name: "UploadOptions",
     components: {
         HeaderComponent,
         CustomButton,
         BackButton,
-        CameraComponent
+        CameraComponent,
+        VideoComponent
     },
     data(){
         return{
-            openCamera: false
-
+            openCamera: false,
+            openVideo: false
         }
     },
     methods: {

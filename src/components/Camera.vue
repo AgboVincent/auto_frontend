@@ -8,20 +8,23 @@
 
 
 <script>
+import FileUpload from '@/services/img_upload.js';
 export default {
     name: "CameraComponent",
     components: {},
     data(){
         return{
             video: null,
-            canvas: null
+            canvas: null,
+            fileUpload: new FileUpload()
         }
 
     },
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video:{facingMode: { exact: 'environment' }} , audio: false,
+                video:  {facingMode: { exact: 'environment' }} 
+                , audio: false,
 
             }).then(stream => {
                 this.video.srcObject = stream;
@@ -37,8 +40,22 @@ export default {
         takePicture(){
             let context = this.canvas.getContext('2d');
             context.drawImage(this.video, 0,0, this.video.videoWidth, this.video.videoHeight);
-            this.$emit('picture-taken', this.canvas.toDataURL('image/png'))
-
+            this.$emit('picture-taken', this.canvas.toDataURL('image/png'));
+            //console.log(this.canvas.toDataURL('image/png'));
+            const url =  this.canvas.toDataURL('image/png');
+            fetch(url)
+                .then(res => res.blob())
+                .then(blob => {
+                    const file = new File([blob], "picture.jpg",{ type: "image/png" });
+                
+                    this.fileUpload.uploadImage(URL.createObjectURL(file))
+                    .then(respones => {
+                        console.log(respones);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+                })
         }
     },
     mounted(){
