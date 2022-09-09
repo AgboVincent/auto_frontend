@@ -26,7 +26,7 @@ export default {
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video:  {facingMode: { exact: 'environment' }} 
+                video: true // {facingMode: { exact: 'environment' }} 
                 , audio: false,
 
             }).then(stream => {
@@ -70,13 +70,14 @@ export default {
         stopRecording(){
             this.mediaRecorder.stop();
             const file = new File([this.videoUrl], "video",{ type: "video/mp4" });
-            this.fileUpload.uploadImage(file)
-            .then(respones => {
-                console.log(respones);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            this.$emit('valueEmit', 'video');
+            // this.fileUpload.uploadImage(file)
+            // .then(respones => {
+            //     console.log(respones);
+            // })
+            // .catch(err => {
+            //     console.log(err);
+            // });
         }
 
     },

@@ -69,8 +69,7 @@
         </div>
     </div>
 </template>
-//submitVehicleDetails()
-//$router.push('/inspectionSteps')
+
 <script>
 import HeaderComponent from '@/components/Header.vue'
 import CustomButton from "../components/CustomButton.vue";
