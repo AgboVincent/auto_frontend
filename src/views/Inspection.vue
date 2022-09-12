@@ -122,7 +122,7 @@ export default {
                 showSuccess('information submitted successfull')
                 setInterval(
                 function () {
-                    this.$router.push('/inspectionSteps')
+                    this.$router.push('/inspectionSteps').catch(() => {})
                 }.bind(this),
                 1500
             );

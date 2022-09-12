@@ -4,6 +4,6 @@ export default class FileUpload{
 
     uploadImage = (file) => {
         //console.log(file)
-       return Axios.post('uploads', {file: file});
+       return Axios.post('uploads', file);
     }
 }

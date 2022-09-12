@@ -1,7 +1,7 @@
 <template>
     <div>
         <video ref="video" @canplay="initCanvas()"></video>
-        <button @click="takePicture()">Take Picture</button>
+        <button @click="takePicture($event)">Take Picture</button>
         <canvas ref="canvas" style="display.none"/>
     </div>
 </template>
@@ -30,6 +30,7 @@ export default {
             }).then(stream => {
                 this.video.srcObject = stream;
                 this.video.play();
+                console.log(window.stream);
             }).catch(err => {
                 console.log(err);
             })
@@ -58,19 +59,25 @@ export default {
                this.$emit('valueEmit', 'imageUrl5');
             }
             //console.log(this.canvas.toDataURL('image/png'));
-            // const url =  this.canvas.toDataURL('image/png');
-            // fetch(url)
-            //     .then(res => res.blob())
-            //     .then(blob => {
-            //         const file = new File([blob], "picture",{ type: "image/png" });
-            //         this.fileUpload.uploadImage(URL.createObjectURL(file))
-            //         .then(respones => {
-            //             console.log(respones);
-            //         })
-            //         .catch(err => {
-            //             console.log(err);
-            //         });
-            //     })
+            const url =  this.canvas.toDataURL('image/png');
+            console.log(url);
+            var formData = new FormData();
+            fetch(url)
+                .then(res => res.blob())
+                .then(blob => {
+                    const file = new File([blob], "file",{ type: "image/png" });
+                    const url = URL.createObjectURL(file)
+                    formData.append("file", blob, "filename.jpg");
+                    console.log(url);
+                    
+                    this.fileUpload.uploadImage(formData)
+                    .then(respones => {
+                        console.log(respones);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+                })
         }
     },
     mounted(){
