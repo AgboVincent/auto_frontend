@@ -29,8 +29,13 @@
                         </select>
                     </div>
 
+                    <div class="input-group input-group-md mb-3">
+                            <input v-model="data.manufacturer" placeholder="Enter Manufacturer" type="text" class="form-control"
+                             aria-label="Sizing example input" id="validationDefault06" required >
+                    </div>
+
                     <div class="input-group mb-3">
-                        <select v-model="data.manufacturer" class="custom-select" id="validationDefault04" required>
+                        <select v-model="data.year" class="custom-select" id="validationDefault04" required>
                             <option :value="data.id" disabled>Year of manufacture</option>
                         <option v-for="year in years" :key="year.id" :value="year">{{year}}</option> 
                         </select>
@@ -129,7 +134,7 @@ export default {
             })
             .catch(e => {
                 console.log(e)
-                showError('Error', e)
+                showError('Error', e.response.data.error)
             })
             .finally(()=>{this.showLoading = false})
             

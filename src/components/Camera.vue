@@ -24,7 +24,7 @@ export default {
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video:  {facingMode: { exact: 'environment' }} 
+                video: true // {facingMode: { exact: 'environment' }} 
                 , audio: false,
 
             }).then(stream => {
@@ -58,18 +58,15 @@ export default {
             if(this.pictureType == 'left'){
                this.$emit('valueEmit', 'imageUrl5');
             }
-            //console.log(this.canvas.toDataURL('image/png'));
+        
             const url =  this.canvas.toDataURL('image/png');
             console.log(url);
             var formData = new FormData();
             fetch(url)
                 .then(res => res.blob())
                 .then(blob => {
-                    const file = new File([blob], "file",{ type: "image/png" });
-                    const url = URL.createObjectURL(file)
+                    console.log(blob)
                     formData.append("file", blob, "filename.jpg");
-                    console.log(url);
-                    
                     this.fileUpload.uploadImage(formData)
                     .then(respones => {
                         console.log(respones);

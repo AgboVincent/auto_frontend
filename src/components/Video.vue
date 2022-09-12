@@ -18,7 +18,7 @@ export default {
             fileUpload: new FileUpload(),
             cameraStream: null,
             mediaRecorder: null,
-            blobsRecorded: [],
+            blobsRecorded: null,
             btnText: null
         }
 
@@ -26,7 +26,7 @@ export default {
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video:  {facingMode: { exact: 'environment' }} 
+                video: true // {facingMode: { exact: 'environment' }} 
                 , audio: false,
 
             }).then(stream => {
@@ -63,22 +63,23 @@ export default {
                 this.video.srcObject = null;
                 this.videoUrl = URL.createObjectURL(event.data);
                 this.video.src = this.videoUrl;
-                console.log(this.videoUrl);
+                this.blobsRecorded = event.data;
+                var formData = new FormData();
+                formData.append("file", this.blobsRecorded, "filename.mp4");
+                this.fileUpload.uploadImage(formData)
+                .then(respones => {
+                    console.log(respones);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
             }
         },
 
         stopRecording(){
             this.mediaRecorder.stop();
-            const file = new File([this.videoUrl], "video",{ type: "video/mp4" });
-            console.log(file);
             this.$emit('valueEmit', 'video');
-            this.fileUpload.uploadImage(file)
-            .then(respones => {
-                console.log(respones);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            
         }
 
     },
