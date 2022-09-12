@@ -3,7 +3,7 @@
        <div class="container">  
            <div class="col">
                <div class="d-flex align-items-start">
-                   <button class="close-btn px-2 my-5">
+                   <button class="close-btn px-2 my-5"  @click="$router.back()">
                      <img class="pb-1" src="../assets/close.png">  Close
                    </button>  
                </div>

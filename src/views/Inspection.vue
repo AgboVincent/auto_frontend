@@ -4,7 +4,7 @@
         <header-component title="Vehicle Inspection"></header-component>
         <div class="col">
             <div class="d-flex align-items-start">
-                   <button class="back-btn px-2 mt-5 py-1">
+                   <button class="back-btn px-2 mt-5 py-1"  @click="$router.back()">
                      <img class="pb-1 pr-2" src="../assets/arrow_back.png"> Back
                    </button>  
             </div>
@@ -125,12 +125,7 @@ export default {
             .then(response => {
                 console.log(response);
                 showSuccess('information submitted successfull')
-                setInterval(
-                function () {
-                    this.$router.push('/inspectionSteps').catch(() => {})
-                }.bind(this),
-                1500
-            );
+                this.$router.push('/inspectionSteps').catch(() => {})
             })
             .catch(e => {
                 console.log(e)

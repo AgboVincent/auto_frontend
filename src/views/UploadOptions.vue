@@ -46,7 +46,7 @@
                         <h6>Capture the left side of your vehicle</h6>
                     </div>
                 </b-card>
-                <custom-button @click="$router.push('/inspectionReport')" title="continue"></custom-button> 
+                <custom-button @click="$router.push('/inspectionReport').catch(() => {})" title="Continue"></custom-button> 
 
             </div>
         </div>
