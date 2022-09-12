@@ -24,7 +24,7 @@ export default {
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video: true // {facingMode: { exact: 'environment' }} 
+                video:  {facingMode: { exact: 'environment' }} 
                 , audio: false,
 
             }).then(stream => {
