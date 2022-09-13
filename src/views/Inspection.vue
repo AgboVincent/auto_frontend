@@ -3,11 +3,7 @@
         <loading v-if="showLoading"/>
         <header-component title="Vehicle Inspection"></header-component>
         <div class="col">
-            <div class="d-flex align-items-start">
-                   <button class="back-btn px-2 mt-5 py-1"  @click="$router.back()">
-                     <img class="pb-1 pr-2" src="../assets/arrow_back.png"> Back
-                   </button>  
-            </div>
+            <back-button></back-button>
               <div class="my-4">
                     <h5  class="title d-flex align-items-start">Tell us a bit about your vehicle</h5> 
                     <span class="font-weight-light d-flex align-items-start">Please provide accurate information.</span>
@@ -81,12 +77,14 @@ import CustomButton from "../components/CustomButton.vue";
 import PreEvaluation from '@/services/pre_evaluation.js';
 import {showError, showSuccess} from "@/helpers/alerts";
 import Loading from '../components/Loading.vue';
+import BackButton from "@/components/BackButton.vue";
 export default {
     name:"VehicleInspection",
     components: {
         HeaderComponent,
         CustomButton,
-        Loading
+        Loading,
+        BackButton
     },
     data(){
         return{
@@ -124,6 +122,7 @@ export default {
             this.preEvaluation.submitVehicleDetails(this.data)
             .then(response => {
                 console.log(response);
+                localStorage.setItem('carData', JSON.stringify(this.data));
                 showSuccess('information submitted successfull')
                 this.$router.push('/inspectionSteps').catch(() => {})
             })

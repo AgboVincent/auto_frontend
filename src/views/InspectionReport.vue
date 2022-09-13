@@ -7,33 +7,33 @@
                               subtitle="Text Summary on inspection report.">
             </page-description>
             <b-card>
-                <b-col>
+                <b-col v-if="carData">
                     <b-row class="justify-content-between">
                         <b-col>
                             <h5 class="title d-flex align-items-start">Vehicle Brand</h5>
-                            <h5 class="value d-flex align-items-start">Honda</h5>
+                            <h5 class="value d-flex align-items-start">{{carData.brand}}</h5>
                         </b-col>
                         <b-col>
-                            <h5 class="title d-flex justify-content-end">Vehicle Brand</h5>
-                            <h5 class="value d-flex justify-content-end">Honda</h5>
+                            <h5 class="title d-flex justify-content-end">Vehicle Model</h5>
+                            <h5 class="value d-flex justify-content-end">{{carData.model}}</h5>
                         </b-col>
                     </b-row>
                     <br>
                     <b-row class="justify-content-between">
                         <b-col>
                             <h5 class="title d-flex align-items-start">Color</h5>
-                            <h5 class="value d-flex align-items-start">Blue</h5>
+                            <h5 class="value d-flex align-items-start">{{carData.color}}</h5>
                         </b-col>
                         <b-col>
                             <h5 class="title d-flex justify-content-end">Year</h5>
-                            <h5 class="value d-flex justify-content-end">2014</h5>
+                            <h5 class="value d-flex justify-content-end">{{carData.year}}</h5>
                         </b-col>
                     </b-row>
                     <br>
                     <b-row class="justify-content-between">
                          <b-col>
                              <h5 class="title d-flex align-items-start">VIN</h5>
-                             <h5 class="value d-flex align-items-start">5FNYF8H9XKB005522</h5>
+                             <h5 class="value d-flex align-items-start">{{ carData.chassis_number}}</h5>
                         </b-col>
                     </b-row>
                 </b-col>
@@ -79,6 +79,21 @@ export default {
         CustomButton,
         BackButton,
         PageDescription
+    },
+    data() {
+        return {
+            carData: null
+        }
+    },
+    methods: {
+        name() {
+            
+        },
+    },
+    mounted(){
+        if(localStorage.getItem('carData')){
+            this.carData = JSON.parse(localStorage.getItem('carData'));
+        }
     }
     
 }

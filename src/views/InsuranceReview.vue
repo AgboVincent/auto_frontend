@@ -56,6 +56,19 @@ export default {
         HeaderComponent,
         BackButton,
         PageDescription,
+    },
+    data() {
+        return {
+            
+        }
+    },
+    methods: {
+        name() {
+            
+        },
+    },
+    mounted(){
+        
     }
 }
 </script>

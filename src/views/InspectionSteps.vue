@@ -2,11 +2,7 @@
     <div>
         <header-component title="Vehicle Inspection"></header-component>
         <div class="col">
-             <div class="d-flex align-items-start">
-                   <button class="back-btn px-2 my-5 py-1" @click="$router.back()">
-                     <img class="pb-1 pr-2" src="../assets/arrow_back.png"> Back
-                   </button>
-             </div>
+             <back-button></back-button>
              <page-description title="Steps on inspecting your vehicle"
                                subtitle="Follow the instructions below">
              </page-description>
@@ -71,12 +67,14 @@
 import HeaderComponent from '@/components/Header.vue'
 import CustomButton from "../components/CustomButton.vue";
 import PageDescription from "@/components/PageDescription.vue";
+import BackButton from "@/components/BackButton.vue";
 export default {
      name:"InspectionSteps",
      components: {
          HeaderComponent,
          CustomButton,
-         PageDescription
+         PageDescription,
+         BackButton
      },
      data(){
          return{

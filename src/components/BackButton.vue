@@ -1,7 +1,7 @@
 <template>
     <div>
          <div class="d-flex align-items-start">
-            <button class="back-btn px-2 my-5 py-1">
+            <button class="back-btn px-2 my-5 py-1" @click="$router.back()"> 
                 <img class="pb-1 pr-2" src="../assets/arrow_back.png"> Back
             </button>
         </div>
