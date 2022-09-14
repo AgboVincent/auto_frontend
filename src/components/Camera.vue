@@ -8,8 +8,8 @@
 
 
 <script>
-//import FileUpload from '@/services/img_upload.js';
-import axios from 'axios';
+import FileUpload from '@/services/img_upload.js';
+//import axios from 'axios';
 export default {
     name: "CameraComponent",
     components: {},
@@ -18,7 +18,7 @@ export default {
         return{
             video: null,
             canvas: null,
-           // fileUpload: new FileUpload()
+            fileUpload: new FileUpload()
         }
 
     },
@@ -68,8 +68,8 @@ export default {
                 .then(blob => {
                     console.log(blob)
                     formData.append("file", blob, "filename.jpg");
-                    let url = (window.env && window.env.VUE_APP_API_URL) ? window.env.VUE_APP_API_URL : process.env.VUE_APP_API_URL;
-                    axios.post(`${url}uploads`, formData)
+                    //let url = (window.env && window.env.VUE_APP_API_URL) ? window.env.VUE_APP_API_URL : process.env.VUE_APP_API_URL;
+                    this.fileUpload.uploadImage(formData)
                     .then(respones => {
                         console.log(respones);
                     })
