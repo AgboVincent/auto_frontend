@@ -1,5 +1,6 @@
 <template>
     <div>
+        <loading v-if="showLoading"/>
         <video ref="video" @canplay="initCanvas()"></video>
         <button @click="takePicture($event)">Take Picture</button>
         <canvas ref="canvas" style="display.none"/>
@@ -9,16 +10,17 @@
 
 <script>
 import FileUpload from '@/services/img_upload.js';
-//import axios from 'axios';
+import Loading from './Loading.vue';
 export default {
     name: "CameraComponent",
-    components: {},
+    components: {Loading},
     props:['pictureType'],
     data(){
         return{
             video: null,
             canvas: null,
-            fileUpload: new FileUpload()
+            fileUpload: new FileUpload(),
+            showLoading:false
         }
 
     },
@@ -41,24 +43,10 @@ export default {
             this.canvas.setAttribute('height', this.video.videoHeight)
         },
         takePicture(){
+            this.showLoading = true;
             let context = this.canvas.getContext('2d');
             context.drawImage(this.video, 0,0, this.video.videoWidth, this.video.videoHeight);
             console.log(this.pictureType)
-            if(this.pictureType == 'engine'){
-               this.$emit('valueEmit', 'imageUrl1');
-            }
-            if(this.pictureType == 'front'){
-               this.$emit('valueEmit', 'imageUrl2');
-            }
-            if(this.pictureType == 'rear'){
-               this.$emit('valueEmit', 'imageUrl3');
-            }
-            if(this.pictureType == 'right'){
-               this.$emit('valueEmit', 'imageUrl4');
-            }
-            if(this.pictureType == 'left'){
-               this.$emit('valueEmit', 'imageUrl5');
-            }
         
             const url =  this.canvas.toDataURL('image/png');
             console.log(url);
@@ -68,13 +56,33 @@ export default {
                 .then(blob => {
                     console.log(blob)
                     formData.append("file", blob, "filename.jpg");
-                    //let url = (window.env && window.env.VUE_APP_API_URL) ? window.env.VUE_APP_API_URL : process.env.VUE_APP_API_URL;
+                    formData.append('id', localStorage.id);
+                    formData.append('part', this.pictureType);
+                    formData.append('type_id', 1);
                     this.fileUpload.uploadImage(formData)
                     .then(respones => {
                         console.log(respones);
+                        if(this.pictureType == 'engine'){
+                           this.$emit('valueEmit', 'imageUrl1');
+                        }
+                        if(this.pictureType == 'front'){
+                           this.$emit('valueEmit', 'imageUrl2');
+                        }
+                        if(this.pictureType == 'rear'){
+                           this.$emit('valueEmit', 'imageUrl3');
+                        }
+                        if(this.pictureType == 'right'){
+                           this.$emit('valueEmit', 'imageUrl4');
+                        }
+                        if(this.pictureType == 'left'){
+                           this.$emit('valueEmit', 'imageUrl5');
+                        }
                     })
                     .catch(err => {
                         console.log(err);
+                    })
+                    .finally(()=>{
+                        this.showLoading = false;
                     });
                 })
         }

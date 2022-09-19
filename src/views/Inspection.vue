@@ -121,7 +121,8 @@ export default {
             this.showLoading = true;
             this.preEvaluation.submitVehicleDetails(this.data)
             .then(response => {
-                console.log(response);
+                console.log(response.data);
+                localStorage.id = response.data;
                 localStorage.setItem('carData', JSON.stringify(this.data));
                 showSuccess('information submitted successfull')
                 this.$router.push('/inspectionSteps').catch(() => {})

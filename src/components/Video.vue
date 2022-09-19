@@ -1,16 +1,20 @@
 <template>
-    <div  id="main_container">
-        <video id="video" ref="video"  playsinline autoplay loop> Can't load video :(</video>
-        <button id="btn-record" @click="takeVideo()">{{btnText}}</button>
-    </div>
+   <div>
+        <loading v-if="showLoading"/>
+        <div  id="main_container">
+            <video id="video" ref="video"  playsinline autoplay loop> Can't load video :(</video>
+            <button id="btn-record" @click="takeVideo()">{{btnText}}</button>
+        </div>
+   </div> 
 </template>
 
 
 <script>
 import FileUpload from '@/services/img_upload.js';
+import Loading from './Loading.vue';
 export default {
     name: "VideoComponent",
-    components: {},
+    components: {Loading},
     data(){
         return{
             video: null,
@@ -19,14 +23,15 @@ export default {
             cameraStream: null,
             mediaRecorder: null,
             blobsRecorded: null,
-            btnText: null
+            btnText: null,
+            showLoading: false
         }
 
     },
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video:  {facingMode: { exact: 'environment' }} 
+                video: true // {facingMode: { exact: 'environment' }} 
                 , audio: false,
 
             }).then(stream => {
@@ -63,23 +68,27 @@ export default {
                 this.video.srcObject = null;
                 this.videoUrl = URL.createObjectURL(event.data);
                 this.video.src = this.videoUrl;
-                this.blobsRecorded = event.data;
+                this.blobsRecorded = event.data; 
                 var formData = new FormData();
                 formData.append("file", this.blobsRecorded, "filename.mp4");
+                formData.append('id', localStorage.id);
+                formData.append('part', 'video');
+                formData.append('type_id', 2);
                 this.fileUpload.uploadImage(formData)
                 .then(respones => {
                     console.log(respones);
+                    this.$emit('valueEmit', 'video');
                 })
                 .catch(err => {
                     console.log(err);
-                });
+                })
+                .finally(()=>{this.showLoading = false});
             }
         },
 
         stopRecording(){
             this.mediaRecorder.stop();
-            this.$emit('valueEmit', 'video');
-            
+            this.showLoading = true;
         }
 
     },
