@@ -75,9 +75,12 @@ export default {
                 formData.append('part', 'video');
                 formData.append('type_id', 2);
                 this.fileUpload.uploadImage(formData)
-                .then(respones => {
-                    console.log(respones);
-                    this.$emit('valueEmit', 'video');
+                .then(response => {
+                    console.log(response);
+                this.$emit('valueEmit', {
+                    type:"video",
+                    url: response.data.url
+                });
                 })
                 .catch(err => {
                     console.log(err);

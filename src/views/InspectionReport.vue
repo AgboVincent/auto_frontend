@@ -40,22 +40,22 @@
             </b-card>
             <br>
             <b-card>
-                <b-col>
+                <b-col v-if="predictions">
                     <b-row class="justify-content-between">
-                        <h5 class="title">Bumper</h5>
-                        <h5 class="good">Good Condition</h5>
+                        <h5 class="title">Front</h5>
+                        <h5 class="good">G{{predictions.front}}</h5>
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title">Rear View</h5>
-                        <h5 class="severe">Severe</h5>
-                    </b-row>
-                    <b-row class="justify-content-between">
-                        <h5 class="title">Left View</h5>
-                        <h5 class="severe">Sever</h5>
+                        <h5 class="severe">{{predictions.rear}}</h5>
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title">Right View</h5>
-                        <h5 class="fair">Fair</h5>
+                        <h5 class="severe">{{predictions.right}}</h5>
+                    </b-row>
+                    <b-row class="justify-content-between">
+                        <h5 class="title">Left View</h5>
+                        <h5 class="fair">{{predictions.left}}</h5>
                     </b-row>
                 </b-col>
             </b-card>
@@ -82,7 +82,8 @@ export default {
     },
     data() {
         return {
-            carData: null
+            carData: null,
+            predictions:null
         }
     },
     methods: {
@@ -93,6 +94,9 @@ export default {
     mounted(){
         if(localStorage.getItem('carData')){
             this.carData = JSON.parse(localStorage.getItem('carData'));
+        }
+        if(localStorage.getItem('predictions')){
+            this.predictions = JSON.parse(localStorage.getItem('predictions'));
         }
     }
     

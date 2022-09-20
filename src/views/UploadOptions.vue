@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div v-if="openCamera">
+        <loading v-if="showLoading"/>
+        <div v-else-if="openCamera">
             <camera-component :pictureType="pictureType" @valueEmit="valEmit=$event"></camera-component>
         </div>
         <div v-else-if="openVideo">
@@ -46,7 +47,7 @@
                         <h6>Capture the left side of your vehicle</h6>
                     </div>
                 </b-card>
-                <custom-button @click="$router.push('/inspectionReport').catch(() => {})" title="Continue"></custom-button> 
+                <custom-button @click="validateUploads()" title="Continue"></custom-button> 
 
             </div>
         </div>
@@ -59,6 +60,8 @@ import CustomButton from "@/components/CustomButton.vue";
 import BackButton from "@/components/BackButton.vue";
 import CameraComponent from "@/components/Camera.vue";
 import VideoComponent from "@/components/Video.vue";
+import MlService from "@/services/ml.js"
+import Loading from '../components/Loading.vue';
 export default {
     name: "UploadOptions",
     components: {
@@ -66,7 +69,8 @@ export default {
         CustomButton,
         BackButton,
         CameraComponent,
-        VideoComponent
+        VideoComponent,
+        Loading
     },
     data(){
         return{
@@ -80,7 +84,16 @@ export default {
             videoUrl: null,
             valEmit: null,
             pictureType: null,
-            video: null
+            video: null, 
+            mlService: new MlService(),
+            showLoading: false,
+            leftPath: null,
+            rightPath: null,
+            frontPath: null,
+            rearPath: null,
+            enginePath: null,
+            videoPath: null,
+            predictions: {}
         }
     },
     watch: {
@@ -88,39 +101,73 @@ export default {
             this.handleEmits();
         },
     },
+    computed: {
+        images() {
+            return{
+                image_data1: this.mlService.s3Url+this.frontPath,   //front
+                image_data2: this.mlService.s3Url+this.rearPath,   //rear
+                image_data3: this.mlService.s3Url+this.rightPath,   //right
+                image_data4: this.mlService.s3Url+this.leftPath    //left
+            }
+        },
+    },
     methods: {
         handleEmits() {
             console.log(this.valEmit)
-            if(this.valEmit == "imageUrl1"){
+            if(this.valEmit.image == "imageUrl1"){
                 this.imageUrl1 = true;
                 this.openCamera = false;
+                this.enginePath = this.valEmit.url;
             }
-            else if(this.valEmit == "imageUrl2"){
+            else if(this.valEmit.image == "imageUrl2"){
                 this.imageUrl2 = true;
                 this.openCamera = false;
+                this.frontPath = this.valEmit.url;
             }
-             else if(this.valEmit == "imageUrl3"){
+             else if(this.valEmit.image == "imageUrl3"){
                 this.imageUrl3 = true;
                 this.openCamera = false;
+                this.rearPath = this.valEmit.url;
             }
-             else if(this.valEmit == "imageUrl4"){
+             else if(this.valEmit.image == "imageUrl4"){
                 this.imageUrl4 = true;
                 this.openCamera = false;
+                this.rightPath = this.valEmit.url;
             }
-             else if(this.valEmit == "imageUrl5"){
+             else if(this.valEmit.image == "imageUrl5"){
                 this.imageUrl5 = true;
                 this.openCamera = false;
+                this.leftPath = this.valEmit.url
             }
-            else if(this.valEmit == "video"){
+            else if(this.valEmit.type == "video"){
                 this.videoUrl = true;
                 this.openVideo = false;
-                this.valEmit = null;
+                this.videoPath = this.valEmit.url;
+                this.valEmit = {};
             }
         },
         handleType(type){
             this.openCamera = true;
             this.pictureType = type;
-            this.valEmit = null;
+            this.valEmit = {};
+        },
+        validateUploads(){
+            this.showLoading = true;
+            console.log(this.images)
+            this.mlService.detect(this.images)
+            .then(resp=> {
+                console.log(resp.data);
+                this.predictions.front = resp.data[0].Severity;
+                this.predictions.rear = resp.data[1].Severity;
+                this.predictions.right = resp.data[2].Severity;
+                this.predictions.left = resp.data[3].Severity;
+                localStorage.setItem('predictions', JSON.stringify(this.predictions));
+                this.$router.push('/inspectionReport').catch(() => {});
+            })
+            .catch(error=>{
+               console.log(error)
+            })
+            .finally(()=>{this.showLoading = false});
         }
     
     },
