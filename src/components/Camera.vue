@@ -27,7 +27,7 @@ export default {
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video: true //{facingMode: { exact: 'environment' }} 
+                video: {facingMode: { exact: 'environment' }} 
                 , audio: false,
 
             }).then(stream => {
@@ -47,7 +47,7 @@ export default {
             let context = this.canvas.getContext('2d');
             context.drawImage(this.video, 0,0, this.video.videoWidth, this.video.videoHeight);
             console.log(this.pictureType)
-            
+
             const url =  this.canvas.toDataURL('image/png');
             var formData = new FormData();
             fetch(url)
