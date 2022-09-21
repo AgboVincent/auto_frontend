@@ -43,7 +43,7 @@
                 <b-col v-if="predictions">
                     <b-row class="justify-content-between">
                         <h5 class="title">Front</h5>
-                        <h5 class="good">G{{predictions.front}}</h5>
+                        <h5 class="good">{{predictions.front}}</h5>
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title">Rear View</h5>
