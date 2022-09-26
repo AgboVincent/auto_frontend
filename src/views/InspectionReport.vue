@@ -51,7 +51,9 @@
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title">Right View</h5>
-                        <h5 class="severe">{{predictions.right}}</h5>
+                        <b-col>
+                            <h5 class="severe">{{predictions.right}}</h5>
+                        </b-col>
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title">Left View</h5>
@@ -59,7 +61,7 @@
                     </b-row>
                 </b-col>
             </b-card>
-            <custom-button @click="$router.push('/buyPolicy')" title="Submit inspection report"></custom-button>
+            <custom-button @click="$router.push('/buyPolicy')" title="Continue"></custom-button>
 
         </div>
 
@@ -72,6 +74,7 @@ import HeaderComponent from '@/components/Header.vue'
 import CustomButton from "@/components/CustomButton.vue";
 import BackButton from "@/components/BackButton.vue";
 import PageDescription from "@/components/PageDescription.vue";
+import DamageTpyes from '@/services/damage_types.js';
 export default {
     name:"InspectionReport",
     components: {
@@ -83,7 +86,8 @@ export default {
     data() {
         return {
             carData: null,
-            predictions:null
+            predictions:null,
+            damageTpyes: new DamageTpyes()
         }
     },
     methods: {

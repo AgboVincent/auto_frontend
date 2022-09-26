@@ -62,6 +62,7 @@ import CameraComponent from "@/components/Camera.vue";
 import VideoComponent from "@/components/Video.vue";
 import MlService from "@/services/ml.js"
 import Loading from '../components/Loading.vue';
+import FileUpload from '@/services/img_upload.js';
 export default {
     name: "UploadOptions",
     components: {
@@ -93,7 +94,8 @@ export default {
             rearPath: null,
             enginePath: null,
             videoPath: null,
-            predictions: {}
+            predictions: {},
+            fileUpload: new FileUpload(),
         }
     },
     watch: {
@@ -162,6 +164,13 @@ export default {
                 this.predictions.right = resp.data[2].Severity;
                 this.predictions.left = resp.data[3].Severity;
                 localStorage.setItem('predictions', JSON.stringify(this.predictions));
+                this.fileUpload.updateData(resp.data)
+                .then(resp=>{
+                    console.log(resp.data);
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
                 this.$router.push('/inspectionReport').catch(() => {});
             })
             .catch(error=>{
