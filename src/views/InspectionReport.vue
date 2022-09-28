@@ -41,30 +41,96 @@
             <br>
             <b-card>
                 <b-col v-if="predictions">
-                    <b-row class="justify-content-between">
-                        <h5 class="title">Front</h5>
-                        <h5 class="good">{{predictions.front}}</h5>
-                    </b-row>
-                    <b-row class="justify-content-between">
-                        <h5 class="title">Rear View</h5>
-                        <h5 class="severe">{{predictions.rear}}</h5>
-                    </b-row>
-                    <b-row class="justify-content-between">
-                        <h5 class="title">Right View</h5>
-                        <b-col>
-                            <h5 class="severe">{{predictions.right}}</h5>
-                        </b-col>
-                    </b-row>
-                    <b-row class="justify-content-between">
-                        <h5 class="title">Left View</h5>
-                        <h5 class="fair">{{predictions.left}}</h5>
-                    </b-row>
+                    <b-col>
+                        <b-card class="shadow-sm mb-3" border-variant="light">
+                            <div class="mb-3">
+                                <nav class="container-fluid-nav navbar navbar-light bg-light">
+                                    <h4 class="title mt-2">FRONT VIEW</h4>
+                                </nav>
+                            </div>
+                            <b-row v-for="damage in frontView" 
+                                        :key="damage.id" class="justify-content-between mb-3"> 
+                                <b-col>
+                                    <h5  class="d-flex good align-items-start">{{damage.part}}
+                                    </h5>
+                                </b-col>                     
+                            
+                                <b-col>
+                                    <h5 class="d-flex justify-content-end good">{{ damage.prediction }}</h5>
+                                    <h5 class="d-flex justify-content-end good">{{ damage.damage }}% damage</h5>
+                                </b-col>
+                            </b-row>
+                        </b-card>
+                    </b-col>
+
+                    <b-col>
+                        <b-card class="shadow-sm mb-3" border-variant="light">
+                            <div class="mb-3">
+                                <nav class="container-fluid-nav navbar navbar-light bg-light">
+                                    <h4 class="title mt-2">REAR VIEW</h4>
+                                </nav>
+                            </div>
+                        
+                            <b-row v-for="damage in rearView" 
+                                        :key="damage.id" class="justify-content-between mb-3">
+                                <b-col>
+                                    <h5 class="good d-flex align-items-start">{{ damage.part }}</h5>
+                                </b-col>        
+                                
+                                <b-col>
+                                    <h5 class="d-flex justify-content-end good">{{ damage.prediction }}</h5>
+                                    <h5 class="d-flex justify-content-end good">{{ damage.damage }}% damage</h5>
+                                </b-col>
+                            </b-row> 
+                        </b-card>                   
+                    </b-col>
+
+                    <b-col>
+                        <b-card class="shadow-sm mb-3" border-variant="light">            
+                            <div class="mb-3">
+                                <nav class="container-fluid-nav navbar navbar-light bg-light">
+                                    <h4 class="title mt-2">RIGHT VIEW</h4>
+                                </nav>
+                            </div>
+                        
+                            <b-row v-for="damage in rightView" 
+                                        :key="damage.id" class="justify-content-between mb-3">
+                                <b-col>
+                                    <h5 class="good d-flex align-items-start">{{ damage.part }}</h5>
+                                </b-col>        
+                                
+                                <b-col>
+                                    <h5 class="d-flex justify-content-end good">{{ damage.prediction }}</h5>
+                                    <h5 class="d-flex justify-content-end good">{{ damage.damage }}% damage</h5>
+                                </b-col>
+                            </b-row>
+                        </b-card>
+                    </b-col>
+
+                    <b-col>
+                        <b-card class="shadow-sm mb-3" border-variant="light">                       
+                            <div class="mb-3">
+                                <nav class="container-fluid-nav navbar navbar-light bg-light">
+                                    <h4 class="title mt-2">LEFT VIEW</h4>
+                                </nav>
+                            </div>    
+                            <b-row v-for="damage in leftView" 
+                                        :key="damage.id" class="justify-content-between mb-3">
+                                <b-col>
+                                    <h5 class="good d-flex align-items-start">{{ damage.part }}</h5>
+                                </b-col>
+                                
+                                <b-col>
+                                    <h5 class="d-flex justify-content-end good">{{ damage.prediction }}</h5>
+                                    <h5 class="d-flex justify-content-end good">{{ damage.damage }}% damage</h5>
+                                </b-col>
+                            </b-row>
+                        </b-card>
+                    </b-col>
                 </b-col>
             </b-card>
             <custom-button @click="$router.push('/buyPolicy')" title="Continue"></custom-button>
-
         </div>
-
     </div>
 </template>
 
@@ -83,15 +149,149 @@ export default {
         BackButton,
         PageDescription
     },
+    props: {
+        front: { type: Array, default: null },
+        rear: { type: Array, default: null },
+        right: { type: Array, default: null },
+        left: { type: Array,  default: null },
+    },
     data() {
         return {
             carData: null,
             predictions:null,
-            damageTpyes: new DamageTpyes()
+            damageTypes: new DamageTpyes(),
+            prediction: null,
+            score: null,
+            results: [
+                {prediction: "headlight", score: 20},
+                {prediction: "grill", score: 30},
+                {prediction: "bonnet", score: 60}               
+            ],
+            rr: [
+                {prediction: "back fender", score: 20},
+                {prediction: "back light", score: 30},
+                {prediction: "back window", score: 60}               
+            ],
+            rrv: [
+                {prediction: "front door", score: 20},
+                {prediction: "side mirror", score: 30},
+                {prediction: "back door", score: 60}               
+            ],
+            rlv: [
+                {prediction: "front door", score: 20},
+                {prediction: "tyre", score: 30},
+                {prediction: "side mirror", score: 60}               
+            ],
+            frontView: [],
+            rearView: [],
+            rightView: [],
+            leftView: []
+        
         }
     },
+
     methods: {
-        name() {
+        detectFront() {
+            for(let i = 0; i < this.front.length; i++){
+                 for(let j = 0; j < this.damageTypes.frontDamage.length; j++ ){
+                     if( this.damageTypes.frontDamage[j] == this.front[i].prediction){
+                         this.frontView.push(
+                             {part:this.damageTypes.frontDamage[j],
+                              damage: this.front[i].score,
+                              prediction: "Damage detected"
+                             }
+                          )                      
+                     }   
+                 }            
+            }
+            for(let j = 0; j < this.damageTypes.frontDamage.length; j++ ){               
+                const index = this.front.findIndex(object => object.prediction === this.damageTypes.frontDamage[j]);
+                if (index === -1) {
+                    this.frontView.push(
+                        {part:this.damageTypes.frontDamage[j],
+                            damage: "Nil",
+                            prediction: "No Damage"
+                        }
+                    );
+                }
+            }     
+            console.log(this.frontView) 
+
+            for(let i = 0; i < this.rear.length; i++){
+                 for(let j = 0; j < this.damageTypes.rearDamage.length; j++ ){
+                     if( this.damageTypes.rearDamage[j] == this.rear[i].prediction){
+                         this.rearView.push(
+                             {part:this.damageTypes.rearDamage[j],
+                              damage: this.rear[i].score,
+                              prediction: "Damage detected"
+                             }
+                          )                      
+                     }   
+                 }            
+            }
+            for(let j = 0; j < this.damageTypes.rearDamage.length; j++ ){               
+                const index = this.rear.findIndex(object => object.prediction === this.damageTypes.rearDamage[j]);
+                if (index === -1) {
+                    this.rearView.push(
+                        {part:this.damageTypes.rearDamage[j],
+                            damage: "Nil",
+                            prediction: "No Damage"
+                        }
+                    );
+                }
+            }     
+            console.log(this.rearView) 
+
+             for(let i = 0; i < this.right.length; i++){
+                 for(let j = 0; j < this.damageTypes.rightSideDamage.length; j++ ){
+                     if( this.damageTypes.rightSideDamage[j] == this.right[i].prediction){
+                         this.rightView.push(
+                             {part:this.damageTypes.rightSideDamage[j],
+                              damage: this.right[i].score,
+                              prediction: "Damage detected"
+                             }
+                          )                      
+                     }   
+                 }            
+            }
+            for(let j = 0; j < this.damageTypes.rightSideDamage.length; j++ ){               
+                const index = this.right.findIndex(object => object.prediction === this.damageTypes.rightSideDamage[j]);
+                if (index === -1) {
+                    this.rightView.push(
+                        {part:this.damageTypes.rightSideDamage[j],
+                            damage: "Nil",
+                            prediction: "No Damage"
+                        }
+                    );
+                }
+            }     
+            console.log(this.rightView) 
+
+
+            for(let i = 0; i < this.left.length; i++){
+                 for(let j = 0; j < this.damageTypes.leftSideDamage.length; j++ ){
+                     if( this.damageTypes.leftSideDamage[j] == this.left[i].prediction){
+                         this.leftView.push(
+                             {part:this.damageTypes.leftSideDamage[j],
+                              damage: this.left[i].score,
+                              prediction: "Damage detected"
+                             }
+                          )                      
+                     }   
+                 }            
+            }
+            for(let j = 0; j < this.damageTypes.leftSideDamage.length; j++ ){               
+                const index = this.left.findIndex(object => object.prediction === this.damageTypes.leftSideDamage[j]);
+                if (index === -1) {
+                    this.leftView.push(
+                        {part:this.damageTypes.leftSideDamage[j],
+                            damage: "Nil",
+                            prediction: "No Damage"
+                        }
+                    );
+                }
+            }     
+            console.log(this.leftView) 
             
         },
     },
@@ -102,6 +302,7 @@ export default {
         if(localStorage.getItem('predictions')){
             this.predictions = JSON.parse(localStorage.getItem('predictions'));
         }
+        this.detectFront();
     }
     
 }
@@ -111,10 +312,14 @@ export default {
 <style scoped>
 
 .title{
-    font-style: normal;
-    font-weight: 300;
+    font-style: bold;
+    font-weight: 700;
     font-size: 14px;
     color: #5E626A;
+    text-align: center;
+    width: 100%;
+    display: block;
+    float: none;
 }
 .value{
     font-style: normal;
@@ -138,14 +343,6 @@ export default {
     font-size: 15px;
     letter-spacing: -0.2px;
     color: #EC2D20;
-}
-.fair{
-    font-family: 'Outfit';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    letter-spacing: -0.2px;
-    color: #F28C30;
 }
 
 </style>

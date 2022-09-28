@@ -15,7 +15,7 @@ export default class FileUpload{
             );
         });
         console.log(sortData);
-        return Axios.put('result', array);
+        return Axios.put('result', sortData);
      }
 
 } 

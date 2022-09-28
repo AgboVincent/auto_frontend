@@ -115,7 +115,6 @@ export default {
     },
     methods: {
         handleEmits() {
-            console.log(this.valEmit)
             if(this.valEmit.image == "imageUrl1"){
                 this.imageUrl1 = true;
                 this.openCamera = false;
@@ -159,11 +158,7 @@ export default {
             this.mlService.detect(this.images)
             .then(resp=> {
                 console.log(resp.data);
-                this.predictions.front = resp.data[0].Severity;
-                this.predictions.rear = resp.data[1].Severity;
-                this.predictions.right = resp.data[2].Severity;
-                this.predictions.left = resp.data[3].Severity;
-                localStorage.setItem('predictions', JSON.stringify(this.predictions));
+                mlPredictions(resp.data)
                 this.fileUpload.updateData(resp.data)
                 .then(resp=>{
                     console.log(resp.data);
@@ -171,14 +166,80 @@ export default {
                 .catch(err=>{
                     console.log(err);
                 })
-                this.$router.push('/inspectionReport').catch(() => {});
+                
             })
             .catch(error=>{
                console.log(error)
             })
             .finally(()=>{this.showLoading = false});
+        },
+
+        mlPredictions(data){
+            let frontDamages = data[0].damaged_parts.Detected_damages;
+            let frontScores = data[0].damaged_parts.scores;
+            let frontResult = [];
+
+            for(let i = 0; i < frontDamages.length; i++){
+               frontResult.push(
+                    {
+                        prediction: frontDamages[i],
+                        score: frontScores[i]
+                    }
+                )
+            }
+            console.log(frontResult);
+
+            let rearDamages = data[1].damaged_parts.Detected_damages;
+            let rearScores = data[1].damaged_parts.scores;
+            let rearResult = [];
+
+            for(let i = 0; i < rearDamages.length; i++){
+               rearResult.push(
+                    {
+                        prediction: rearDamages[i],
+                        score: rearScores[i]
+                    }
+                )
+            }
+            console.log(rearResult);
+
+            let rightDamages = data[2].damaged_parts.Detected_damages;
+            let rightScores = data[2].damaged_parts.scores;
+            let rightResult = [];
+
+            for(let i = 0; i < rightDamages.length; i++){
+               rightResult.push(
+                    {
+                        prediction: rightDamages[i],
+                        score: rightScores[i]
+                    }
+                )
+            }
+            console.log(rightResult);
+
+            let leftDamages = data[3].damaged_parts.Detected_damages;
+            let leftScores = data[3].damaged_parts.scores;
+            let leftResult = [];
+
+            for(let i = 0; i < leftDamages.length; i++){
+               leftResult.push(
+                    {
+                        prediction: leftDamages[i],
+                        score: leftScores[i]
+                    }
+                )
+            }
+            console.log(leftResult);
+            this.$router.push({ name: 'inspectionReport', 
+            params: {
+                front: frontResult ,
+                rear: rearResult,
+                right: rightResult,
+                left: leftResult
+                }
+            })
         }
-    
+        
     },
     
 }

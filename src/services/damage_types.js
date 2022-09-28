@@ -2,27 +2,37 @@
 
 export default class DamageTypes{
     
-    damage = [
-        "front windshield",
-        "headlight",
-        "grill",
-        "side mirror",
-        "front fender",
-        "front bumper",
-        "bonnet",
-        "front door",
-        "back door",
-        "tyre",
-        "front window",
-        "back window",
-        "trunk",
-        "Back windshield",
-        "Back fender",
-        "back bumper",
-        "backlight",
-        "scratch",
-        "dent",
-        "total",
-        "front",
+    leftSideDamage = [
+      "side mirror",
+      "front door",
+      "back door",
+      "tyre"
+    ];
+
+    rightSideDamage = [
+      "side mirror",
+      "front door",
+      "back door",
+      "tyre"
+    ];
+
+    frontDamage = [
+      "front windshield",
+      "headlight",
+      "grill",
+      "front fender",
+      "front bumper",
+      "bonnet",
+      "front window",
+      "front"
+    ];
+
+    rearDamage = [
+      "back window",
+      "back windshield",
+      "back fender",
+      "back bumper",
+      "back light",
+      "trunk"
     ];
 }

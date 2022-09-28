@@ -42,7 +42,8 @@ const routes = [
   {
     path: '/inspectionReport',
     name: 'inspectionReport',
-    component: InspectionReport
+    component: InspectionReport,
+    props: true
   },
   {
     path: '/buyPolicy',
