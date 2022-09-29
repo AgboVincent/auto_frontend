@@ -6,7 +6,9 @@
             <page-description title="Buy Policy"
                               subtitle="Text on purchase your policy">
             </page-description>
-            <policy-type></policy-type>
+            <div v-for="policy in policies" :key="policy.id" class="mb-3">
+                <policy-type :policy = policy></policy-type>
+            </div>
         </div>    
     </div>
 </template>
@@ -16,6 +18,8 @@ import HeaderComponent from '@/components/Header.vue'
 import BackButton from "@/components/BackButton.vue";
 import PageDescription from "@/components/PageDescription.vue";
 import PolicyType from '@/components/PolicyType.vue';
+import PreEvaluation from '@/services/pre_evaluation.js';
+
 export default {
     name: "BuyPolicy",
     components:{
@@ -26,14 +30,25 @@ export default {
     },
     data(){
         return{
-
+            preEvaluation: new PreEvaluation(),
+            policies: []
         }
     },
     methods: {
-        name() {
-            
+        getPolicies() {
+            this.preEvaluation.getPolicies()
+            .then(response =>{
+                console.log(response.data);
+                this.policies = response.data;
+            })
+            .catch(e =>{
+            console.log(e)
+            })          
         },
     },
+    mounted(){
+        this.getPolicies();
+    }
     
 }
 </script>

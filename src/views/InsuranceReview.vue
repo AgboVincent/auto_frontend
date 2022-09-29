@@ -7,26 +7,26 @@
                               subtitle="Text on insurance review">
             </page-description>
             <b-card>
-                <b-col>
+                <b-col v-if="carData && policy">
                     <b-row class="justify-content-between">
                         <h5 class="title d-flex align-items-start">Full name</h5>
-                        <h5 class="value d-flex align-items-start">Zainab Yahaya</h5>
+                        <h5 class="value d-flex align-items-start">{{ capitalizeFirst(carData.name) }}</h5>
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title d-flex align-items-start">Email</h5>
-                        <h5 class="value d-flex align-items-start">zainab@gmail.com</h5>
+                        <h5 class="value d-flex align-items-start">{{ carData.email }}</h5>
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title d-flex align-items-start">Phone</h5>
-                        <h5 class="value d-flex align-items-start">0904443322</h5>
+                        <h5 class="value d-flex align-items-start">{{ carData.phone }}</h5>
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title d-flex align-items-start">Frequency</h5>
-                        <h5 class="value d-flex align-items-start">Monthly</h5>
+                        <h5 class="value d-flex align-items-start">{{ capitalizeFirst(policy.duration) }}</h5>
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title d-flex align-items-start">Insurance Plan</h5>
-                        <h5 class="value d-flex align-items-start">Policy A</h5>
+                        <h5 class="value d-flex align-items-start">{{ policy.plan }}</h5>
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title d-flex align-items-start">Insurance Type</h5>
@@ -34,12 +34,12 @@
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title d-flex align-items-start">Amount</h5>
-                        <h4 class="value d-flex align-items-start">NGN 4,000</h4>
+                        <h4 class="value d-flex align-items-start">NGN {{ formatAmount(policy.amount) }}</h4>
                     </b-row>
                 </b-col>
             </b-card>
             <br>
-            <button @click="$router.push('/paymentType')" class="mt-3 py-2 col-md-3 purchase-btn">Pay NGN 4,000</button>
+            <button v-if="policy" @click="$router.push('/paymentType')" class="mt-3 py-2 col-md-3 purchase-btn">Pay NGN {{ formatAmount(policy.amount) }}</button>
         </div>  
 
     </div>
@@ -59,16 +59,25 @@ export default {
     },
     data() {
         return {
-            
+            carData: null,
+            policy: null          
         }
     },
     methods: {
-        name() {
-            
+        capitalizeFirst(string){
+            return string.charAt(0).toUpperCase() + string.slice(1)
         },
+        formatAmount(amount){
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
     },
     mounted(){
-        
+        if(localStorage.getItem('carData')){
+            this.carData = JSON.parse(localStorage.getItem('carData'));
+        }
+        if(localStorage.getItem('policy')){
+            this.policy = JSON.parse(localStorage.getItem('policy'));
+        }
     }
 }
 </script>

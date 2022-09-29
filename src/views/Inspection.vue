@@ -141,12 +141,11 @@ export default {
     mounted(){
         this.preEvaluation.getVehicleBrands()
         .then(response =>{
-            //console.log(response)
             this.brands = response.data;
         })
         .catch(e => {
             console.log(e)
-        })
+        });  
 
     }
     

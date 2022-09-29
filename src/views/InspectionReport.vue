@@ -40,7 +40,7 @@
             </b-card>
             <br>
             <b-card>
-                <b-col v-if="predictions">
+                <b-col>
                     <b-col>
                         <b-card class="shadow-sm mb-3" border-variant="light">
                             <div class="mb-3">
@@ -56,8 +56,9 @@
                                 </b-col>                     
                             
                                 <b-col>
-                                    <h5 class="d-flex justify-content-end good">{{ damage.prediction }}</h5>
-                                    <h5 class="d-flex justify-content-end good">{{ damage.damage }}% damage</h5>
+                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ damage.prediction }}</h5>
+                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">
+                                        {{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
                                 </b-col>
                             </b-row>
                         </b-card>
@@ -78,8 +79,8 @@
                                 </b-col>        
                                 
                                 <b-col>
-                                    <h5 class="d-flex justify-content-end good">{{ damage.prediction }}</h5>
-                                    <h5 class="d-flex justify-content-end good">{{ damage.damage }}% damage</h5>
+                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ damage.prediction }}</h5>
+                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
                                 </b-col>
                             </b-row> 
                         </b-card>                   
@@ -100,8 +101,8 @@
                                 </b-col>        
                                 
                                 <b-col>
-                                    <h5 class="d-flex justify-content-end good">{{ damage.prediction }}</h5>
-                                    <h5 class="d-flex justify-content-end good">{{ damage.damage }}% damage</h5>
+                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ damage.prediction }}</h5>
+                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
                                 </b-col>
                             </b-row>
                         </b-card>
@@ -121,8 +122,8 @@
                                 </b-col>
                                 
                                 <b-col>
-                                    <h5 class="d-flex justify-content-end good">{{ damage.prediction }}</h5>
-                                    <h5 class="d-flex justify-content-end good">{{ damage.damage }}% damage</h5>
+                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ damage.prediction }}</h5>
+                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
                                 </b-col>
                             </b-row>
                         </b-card>
@@ -162,26 +163,6 @@ export default {
             damageTypes: new DamageTpyes(),
             prediction: null,
             score: null,
-            results: [
-                {prediction: "headlight", score: 20},
-                {prediction: "grill", score: 30},
-                {prediction: "bonnet", score: 60}               
-            ],
-            rr: [
-                {prediction: "back fender", score: 20},
-                {prediction: "back light", score: 30},
-                {prediction: "back window", score: 60}               
-            ],
-            rrv: [
-                {prediction: "front door", score: 20},
-                {prediction: "side mirror", score: 30},
-                {prediction: "back door", score: 60}               
-            ],
-            rlv: [
-                {prediction: "front door", score: 20},
-                {prediction: "tyre", score: 30},
-                {prediction: "side mirror", score: 60}               
-            ],
             frontView: [],
             rearView: [],
             rightView: [],
@@ -198,7 +179,8 @@ export default {
                          this.frontView.push(
                              {part:this.damageTypes.frontDamage[j],
                               damage: this.front[i].score,
-                              prediction: "Damage detected"
+                              prediction: "Damage detected",
+                              color: "#EC2D20"
                              }
                           )                      
                      }   
@@ -209,8 +191,9 @@ export default {
                 if (index === -1) {
                     this.frontView.push(
                         {part:this.damageTypes.frontDamage[j],
-                            damage: "Nil",
-                            prediction: "No Damage"
+                            damage: "0",
+                            prediction: "No Damage",
+                            color: "#06B856"
                         }
                     );
                 }
@@ -223,7 +206,8 @@ export default {
                          this.rearView.push(
                              {part:this.damageTypes.rearDamage[j],
                               damage: this.rear[i].score,
-                              prediction: "Damage detected"
+                              prediction: "Damage detected",
+                              color: "#EC2D20"
                              }
                           )                      
                      }   
@@ -234,8 +218,9 @@ export default {
                 if (index === -1) {
                     this.rearView.push(
                         {part:this.damageTypes.rearDamage[j],
-                            damage: "Nil",
-                            prediction: "No Damage"
+                            damage: "0",
+                            prediction: "No Damage",
+                            color: "#06B856"
                         }
                     );
                 }
@@ -248,7 +233,8 @@ export default {
                          this.rightView.push(
                              {part:this.damageTypes.rightSideDamage[j],
                               damage: this.right[i].score,
-                              prediction: "Damage detected"
+                              prediction: "Damage detected",
+                              color: "#EC2D20"
                              }
                           )                      
                      }   
@@ -259,8 +245,9 @@ export default {
                 if (index === -1) {
                     this.rightView.push(
                         {part:this.damageTypes.rightSideDamage[j],
-                            damage: "Nil",
-                            prediction: "No Damage"
+                            damage: "0",
+                            prediction: "No Damage",
+                            color: "#06B856"
                         }
                     );
                 }
@@ -274,7 +261,8 @@ export default {
                          this.leftView.push(
                              {part:this.damageTypes.leftSideDamage[j],
                               damage: this.left[i].score,
-                              prediction: "Damage detected"
+                              prediction: "Damage detected",
+                              color: "#EC2D20"
                              }
                           )                      
                      }   
@@ -285,8 +273,9 @@ export default {
                 if (index === -1) {
                     this.leftView.push(
                         {part:this.damageTypes.leftSideDamage[j],
-                            damage: "Nil",
-                            prediction: "No Damage"
+                            damage: "0",
+                            prediction: "No Damage",
+                            color: "#06B856"
                         }
                     );
                 }
@@ -298,9 +287,6 @@ export default {
     mounted(){
         if(localStorage.getItem('carData')){
             this.carData = JSON.parse(localStorage.getItem('carData'));
-        }
-        if(localStorage.getItem('predictions')){
-            this.predictions = JSON.parse(localStorage.getItem('predictions'));
         }
         this.detectFront();
     }

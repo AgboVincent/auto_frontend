@@ -1,12 +1,12 @@
 <template>
     <b-card>
         <div class="col">
-            <page-description title="Policy A"
-                              subtitle="This plan loerem ispum consectetur plan loerem ispum consectetur">
+            <page-description :title="policy.name"
+                              :subtitle="policy.description">
             </page-description>
             <b-row class="justify-content-between px-3">
                 <div class="row px-3">
-                    <h4 class="price pr-1">NGN4,0000</h4>
+                    <h4 class="price pr-1">NGN {{formatAmount(policy.amount)}}</h4>
                     <h6 class="duration">/ month</h6>
                 </div>
                 <button v-if="details"  class="details-btn" @click="showDetails()">Details <img src="../assets/arrow_up.png"></button>
@@ -14,23 +14,15 @@
             </b-row>
             <div v-if="details">
                 <br>
-                <div class="row px-3">
-                    <input class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                    <h6>Lorem</h6>
-                </div>
-                <br>
-                <div class="row px-3">
-                    <input class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                    <h6>Lorem</h6>
-                </div>
-                <br>
-                <div class="row px-3">
-                    <input class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                    <h6>Lorem</h6>
+                <div v-for="item in policy.items" :key="item.id">
+                    <div class="row px-3">
+                        <input class="mb-2 mr-3" v-model="item.is_covered" type="checkbox" aria-label="Checkbox for following text input">
+                        <h6>{{item.name}}</h6>
+                    </div>
                 </div>
                 <br>
                 <h5 class=" view d-flex align-items-start">View more details</h5>
-                <button @click="$router.push('/insuranceReview')" class="mt-3 py-2 col-md-3 purchase-btn">Purchase policy</button>
+                <button @click="reviewPolicy()" class="mt-3 py-2 col-md-3 purchase-btn">Purchase policy</button>
             </div>
         </div>       
     </b-card>
@@ -44,6 +36,7 @@ export default {
     props:{
        policyTitle: String,
        policySubTitle: String,
+       policy: Object
 
     },
     components: { 
@@ -51,13 +44,24 @@ export default {
     },
     data() {
         return {
-            details: false
+            details: false,
+            data: {}
         }
     },
     methods: {
         showDetails() {
             this.details = !this.details
         },
+        reviewPolicy(){
+             this.data.amount = this.policy.amount;
+             this.data.plan = this.policy.name;
+             this.data.duration = this.policy.payment_duration;
+             localStorage.setItem('policy', JSON.stringify(this.data));
+            this.$router.push('/insuranceReview');
+        },
+        formatAmount(amount){
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
     },
     
 }

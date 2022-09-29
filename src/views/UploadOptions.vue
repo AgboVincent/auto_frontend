@@ -106,10 +106,10 @@ export default {
     computed: {
         images() {
             return{
-                image_data1: this.mlService.s3Url+this.frontPath,   //front
-                image_data2: this.mlService.s3Url+this.rearPath,   //rear
-                image_data3: this.mlService.s3Url+this.rightPath,   //right
-                image_data4: this.mlService.s3Url+this.leftPath    //left
+                image_data1: "https://media.istockphoto.com/photos/crashed-car-picture-id183413919", //this.mlService.s3Url+this.frontPath,   //front
+                image_data2: "https://thumbs.dreamstime.com/z/rear-red-car-get-accident-hit-damage-crash-rear-red-car-get-accident-hit-damage-crash-171702188.jpg", //this.mlService.s3Url+this.rearPath,   //rear
+                image_data3: "https://media.istockphoto.com/photos/silver-car-with-a-large-dent-in-the-side-ruining-two-doors-picture-id172181182?k=20&m=172181182&s=612x612&w=0&h=Q9wLjv2ga9LLQH7Z5Hyhn29r8ySoUlXg5jC7cB3TUyQ=", //this.mlService.s3Url+this.rightPath,   //right
+                image_data4: "https://media.istockphoto.com/photos/silver-car-with-a-large-dent-in-the-side-ruining-two-doors-picture-id172181182?k=20&m=172181182&s=612x612&w=0&h=Q9wLjv2ga9LLQH7Z5Hyhn29r8ySoUlXg5jC7cB3TUyQ=" //this.mlService.s3Url+this.leftPath    //left
             }
         },
     },
@@ -158,7 +158,7 @@ export default {
             this.mlService.detect(this.images)
             .then(resp=> {
                 console.log(resp.data);
-                mlPredictions(resp.data)
+                this.mlPredictions(resp.data)
                 this.fileUpload.updateData(resp.data)
                 .then(resp=>{
                     console.log(resp.data);

@@ -13,4 +13,8 @@ export default class PreEvaulation{
     getVehicleModel = (brand) => {
         return Axios.get(`brands/${brand}/models`)
     }
+
+    getPolicies = () => {
+        return Axios.get('new/policies');
+    }
 }
