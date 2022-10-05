@@ -106,10 +106,10 @@ export default {
     computed: {
         images() {
             return{
-                image_data1: "https://images.unsplash.com/photo-1441148345475-03a2e82f9719?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2FyJTIwZnJvbnR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60", //this.mlService.s3Url+this.frontPath,   //front
-                image_data2: "https://c8.alamy.com/comp/EDJ2K9/black-car-rear-angle-EDJ2K9.jpg", //this.mlService.s3Url+this.rearPath,   //rear
-                image_data3: "https://image.shutterstock.com/image-illustration/car-isolated-on-white-orange-260nw-734598829.jpg", //this.mlService.s3Url+this.rightPath,   //right
-                image_data4: "https://image.shutterstock.com/image-illustration/car-isolated-on-white-orange-260nw-734598829.jpg" //this.mlService.s3Url+this.leftPath    //left
+                image_data1: this.mlService.s3Url+this.frontPath,   //front
+                image_data2: this.mlService.s3Url+this.rearPath,   //rear
+                image_data3: this.mlService.s3Url+this.rightPath,   //right
+                image_data4: this.mlService.s3Url+this.leftPath    //left
             }
         },
     },
