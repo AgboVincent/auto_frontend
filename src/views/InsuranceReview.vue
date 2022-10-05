@@ -39,13 +39,13 @@
                 </b-col>
             </b-card>
             <br>
-            <button v-if="policy" @click="$router.push('/paymentType')" class="mt-3 py-2 col-md-3 purchase-btn">Pay NGN {{ formatAmount(policy.amount) }}</button>
+            <button v-if="policy" @click="makePayment()" class="mt-3 py-2 col-md-3 purchase-btn">Pay NGN {{ formatAmount(policy.amount) }}</button>
         </div>  
 
     </div>
 </template>
 
-
+//$router.push('/paymentType')
 <script>
 import HeaderComponent from '@/components/Header.vue'
 import BackButton from "@/components/BackButton.vue";
@@ -69,6 +69,29 @@ export default {
         },
         formatAmount(amount){
             return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        },
+        makePayment() {
+        this.$launchFlutterwave({
+            tx_ref: Date.now(),
+            amount: this.policy.amount,
+            currency: 'NGN',
+            payment_options: 'card,mobilemoney,ussd',
+            customer: {
+            email: this.carData.email,
+            phonenumber: this.carData.phone,
+            name: this.carData.name
+            },
+            acceptMpesaPayment: false,
+            callback: function(data) {
+            // specified callback function
+            console.log(data)
+            },
+            customizations: {
+            title: 'My store',
+            description: 'Payment for items in cart',
+            logo: 'https://assets.piedpiper.com/logo.png'
+            }
+        })
         }
     },
     mounted(){

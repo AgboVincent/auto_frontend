@@ -29,7 +29,7 @@
                             <img src="../assets/coin.png">
                         </div>
                         <div class="col">
-                            <h6 class="d-flex align-items-start">The Video should not be longer than 2minutes</h6>
+                            <h6 class="d-flex align-items-start">The Video should not be longer than 15 seconds</h6>
                         </div>
                     </div>
                     <div class="row px-3 py-3">

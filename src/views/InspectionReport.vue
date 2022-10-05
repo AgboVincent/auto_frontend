@@ -198,7 +198,7 @@ export default {
                     );
                 }
             }     
-            console.log(this.frontView) 
+           
 
             for(let i = 0; i < this.rear.length; i++){
                  for(let j = 0; j < this.damageTypes.rearDamage.length; j++ ){
@@ -225,7 +225,7 @@ export default {
                     );
                 }
             }     
-            console.log(this.rearView) 
+           
 
              for(let i = 0; i < this.right.length; i++){
                  for(let j = 0; j < this.damageTypes.rightSideDamage.length; j++ ){
@@ -252,7 +252,7 @@ export default {
                     );
                 }
             }     
-            console.log(this.rightView) 
+            
 
 
             for(let i = 0; i < this.left.length; i++){
@@ -280,7 +280,7 @@ export default {
                     );
                 }
             }     
-            console.log(this.leftView) 
+           
             
         },
     },

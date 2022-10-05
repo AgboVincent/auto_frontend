@@ -14,9 +14,9 @@
     <br>
     <div class="py-2">
         <div class="d-flex flex-row flex-nowrap overflow-auto">
-            <policy-card></policy-card>
-            <policy-card></policy-card>
-            <policy-card></policy-card>
+          <div v-for="policy in policies" :key="policy.id">
+            <policy-card :policy="policy"></policy-card>
+          </div>
         </div>
 
     </div>
@@ -45,6 +45,8 @@
 import HeaderComponent from '@/components/Header.vue'
 import CardComponent from  '@/components/Card.vue';
 import PolicyCard from  '@/components/PolicyCard.vue';
+import PreEvaluation from '@/services/pre_evaluation.js';
+
 export default {
   name: 'HomeView',
   components: {
@@ -54,16 +56,26 @@ export default {
   },
   data(){
     return{
+      preEvaluation: new PreEvaluation(),
+      policies: []
 
     }
   },
   methods: {
+        getPolicies() {
+            this.preEvaluation.getPolicies()
+            .then(response =>{
+                this.policies = response.data;
+            })
+            .catch(e =>{
+            console.log(e)
+            })          
+        },
 
-    
-  },
-  mounted(){
-    
-  }
+    },
+    mounted(){
+        this.getPolicies();
+    }
 }
 </script>
 

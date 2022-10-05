@@ -106,10 +106,10 @@ export default {
     computed: {
         images() {
             return{
-                image_data1: "https://media.istockphoto.com/photos/crashed-car-picture-id183413919", //this.mlService.s3Url+this.frontPath,   //front
-                image_data2: "https://thumbs.dreamstime.com/z/rear-red-car-get-accident-hit-damage-crash-rear-red-car-get-accident-hit-damage-crash-171702188.jpg", //this.mlService.s3Url+this.rearPath,   //rear
-                image_data3: "https://media.istockphoto.com/photos/silver-car-with-a-large-dent-in-the-side-ruining-two-doors-picture-id172181182?k=20&m=172181182&s=612x612&w=0&h=Q9wLjv2ga9LLQH7Z5Hyhn29r8ySoUlXg5jC7cB3TUyQ=", //this.mlService.s3Url+this.rightPath,   //right
-                image_data4: "https://media.istockphoto.com/photos/silver-car-with-a-large-dent-in-the-side-ruining-two-doors-picture-id172181182?k=20&m=172181182&s=612x612&w=0&h=Q9wLjv2ga9LLQH7Z5Hyhn29r8ySoUlXg5jC7cB3TUyQ=" //this.mlService.s3Url+this.leftPath    //left
+                image_data1: "https://images.unsplash.com/photo-1441148345475-03a2e82f9719?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2FyJTIwZnJvbnR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60", //this.mlService.s3Url+this.frontPath,   //front
+                image_data2: "https://c8.alamy.com/comp/EDJ2K9/black-car-rear-angle-EDJ2K9.jpg", //this.mlService.s3Url+this.rearPath,   //rear
+                image_data3: "https://image.shutterstock.com/image-illustration/car-isolated-on-white-orange-260nw-734598829.jpg", //this.mlService.s3Url+this.rightPath,   //right
+                image_data4: "https://image.shutterstock.com/image-illustration/car-isolated-on-white-orange-260nw-734598829.jpg" //this.mlService.s3Url+this.leftPath    //left
             }
         },
     },
@@ -153,11 +153,11 @@ export default {
             this.valEmit = {};
         },
         validateUploads(){
+            if(this.frontPath === null || this.rearPath === null || 
+            this.leftPath === null || this.rightPath === null) return;
             this.showLoading = true;
-            console.log(this.images)
             this.mlService.detect(this.images)
             .then(resp=> {
-                console.log(resp.data);
                 this.mlPredictions(resp.data)
                 this.fileUpload.updateData(resp.data)
                 .then(resp=>{
@@ -187,7 +187,7 @@ export default {
                     }
                 )
             }
-            console.log(frontResult);
+            
 
             let rearDamages = data[1].damaged_parts.Detected_damages;
             let rearScores = data[1].damaged_parts.scores;
@@ -201,7 +201,7 @@ export default {
                     }
                 )
             }
-            console.log(rearResult);
+            
 
             let rightDamages = data[2].damaged_parts.Detected_damages;
             let rightScores = data[2].damaged_parts.scores;
@@ -215,7 +215,7 @@ export default {
                     }
                 )
             }
-            console.log(rightResult);
+            
 
             let leftDamages = data[3].damaged_parts.Detected_damages;
             let leftScores = data[3].damaged_parts.scores;
@@ -229,7 +229,7 @@ export default {
                     }
                 )
             }
-            console.log(leftResult);
+           
             this.$router.push({ name: 'inspectionReport', 
             params: {
                 front: frontResult ,

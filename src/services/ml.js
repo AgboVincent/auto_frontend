@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const validatorUrl = "https://auto-service.sjeq6kb6jh0oc.us-east-2.cs.amazonlightsail.com/";
 let headers = {
-    "Content-Type":"application/json",
+    "Content-Type":"application/json"
 }
 const Axios = axios.create({
     baseURL: validatorUrl,
