@@ -25,10 +25,10 @@
                         </select>
                     </div>
 
-                    <div class="input-group input-group-md mb-3">
+                    <!-- <div class="input-group input-group-md mb-3">
                             <input v-model="data.manufacturer" placeholder="Enter Manufacturer" type="text" class="form-control"
                              aria-label="Sizing example input" id="validationDefault06" required >
-                    </div>
+                    </div> -->
 
                     <div class="input-group mb-3">
                         <select v-model="data.year" class="custom-select" id="validationDefault04" required>
@@ -49,14 +49,14 @@
                              aria-label="Sizing example input" id="validationDefault06" required >
                     </div>
                     
-                    <div class="input-group mb-3">
+                    <!-- <div class="input-group mb-3">
                         <select v-model="data.status" class="custom-select" id="validationDefault07" required>
                             <option :value="data.id" disabled>Vehicle status</option>
                             <option value="Sever Damage">Sever Damage</option>
                             <option value="Fair Damage">Fair Damage</option>
                             <option value="Mid level damage">Mid level Damage</option>
                         </select>
-                    </div>
+                    </div> -->
                     
                     <div class="input-group mb-3">
                         <select v-model="data.color" class="custom-select" id="validationDefault08" required>
@@ -119,9 +119,10 @@ export default {
     methods: {
         submitVehicleDetails() {
             this.showLoading = true;
+            this.data.manufacturer = this.data.brand;
+            this.data.status = "non";
             this.preEvaluation.submitVehicleDetails(this.data)
             .then(response => {
-                console.log(response.data);
                 localStorage.id = response.data;
                 localStorage.setItem('carData', JSON.stringify(this.data));
                 showSuccess('information submitted successfull')

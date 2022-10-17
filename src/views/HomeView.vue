@@ -7,7 +7,7 @@
       <span class="d-flex align-items-start">Welcome to Curacel Auto</span>
     </div>
     <br>
-    <div class="row mx-3 justify-content-between">
+    <!-- <div class="row mx-3 justify-content-between">
       <h6 >Active Policies</h6>
       <button class="px-3 view-btn">View all <img src="../assets/arrow_forward_2.png"></button>
     </div>
@@ -19,12 +19,13 @@
           </div>
         </div>
 
-    </div>
+    </div> -->
     <br>
     <card-component leadingIcon="inspect_img.png"
                     title="Inspect your vehicle"
-                    subtitleOne="Dis enim pulvinar ornare integer"
-                    subtitleTwo="integer aliquam purus ultrices."
+                    subtitleOne="Have your vehicle accessed and"
+                    subtitleTwo="pre-evaluated before purchasing "
+                    subtitleThree="a policy ."
                     color="#DEEFFF"
                     @click="$router.push('/getStarted')"
     >
@@ -32,8 +33,8 @@
     <br>
     <card-component leadingIcon="claim_img.png"
                     title="Make an insurance claim"
-                    subtitleOne="Dis enim pulvinar ornare integer"
-                    subtitleTwo="integer aliquam purus ultrices."
+                    subtitleOne="Submit your claim in 5 easy"
+                    subtitleTwo="steps."
                     color="#F5EDFF"
     >
     </card-component>
@@ -65,7 +66,8 @@ export default {
         getPolicies() {
             this.preEvaluation.getPolicies()
             .then(response =>{
-                this.policies = response.data;
+                //this.policies = response.data;
+                console.log(response.data);
             })
             .catch(e =>{
             console.log(e)

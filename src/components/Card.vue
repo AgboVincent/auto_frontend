@@ -9,6 +9,7 @@
                     <h6 class="d-flex align-items-start">{{title}}</h6>
                     <span class="d-flex align-items-start">{{subtitleOne}}</span>
                     <span class="d-flex align-items-start">{{subtitleTwo}}</span>
+                    <span class="d-flex align-items-start">{{subtitleThree}}</span>
                 </div>
                 <div class="align-self-center">
                     <img src="../assets/arrow_forward.png">
@@ -26,6 +27,7 @@
             title: String,
             subtitleOne: String,
             subtitleTwo: String,
+            subtitleThree: String,
             color:String
         },
         data(){

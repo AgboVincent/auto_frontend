@@ -62,35 +62,35 @@ export default {
                     .then(response => {
                         console.log(response);
                         if(this.pictureType == 'engine'){
-                           //this.$emit('valueEmit', 'imageUrl1');
+                           
                            this.$emit('valueEmit', {
                                image:"imageUrl1",
                                url: response.data.url
                            });
                         }
                         if(this.pictureType == 'front'){
-                           //this.$emit('valueEmit', 'imageUrl2');
+                           
                             this.$emit('valueEmit', {
                                image:"imageUrl2",
                                url: response.data.url
                            });
                         }
                         if(this.pictureType == 'rear'){
-                           //this.$emit('valueEmit', 'imageUrl3');
+                           
                            this.$emit('valueEmit', {
                                image:"imageUrl3",
                                url: response.data.url
                            });
                         }
                         if(this.pictureType == 'right'){
-                           //this.$emit('valueEmit', 'imageUrl4');
+                           
                            this.$emit('valueEmit', {
                                image:"imageUrl4",
                                url: response.data.url
                            });
                         }
                         if(this.pictureType == 'left'){
-                           //this.$emit('valueEmit', 'imageUrl5');
+                           
                            this.$emit('valueEmit', {
                                image:"imageUrl5",
                                url: response.data.url
