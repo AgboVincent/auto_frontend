@@ -12,14 +12,13 @@
       <button class="px-3 view-btn">View all <img src="../assets/arrow_forward_2.png"></button>
     </div>
     <br>
-    <!-- <div class="py-2">
+    <div class="py-2">
         <div class="d-flex flex-row flex-nowrap overflow-auto">
           <div v-for="policy in policies" :key="policy.id">
             <policy-card :policy="policy"></policy-card>
           </div>
         </div>
-
-    </div> -->
+    </div>
     <br>
     <card-component leadingIcon="inspect_img.png"
                     title="Inspect your vehicle"
