@@ -7,12 +7,12 @@
       <span class="d-flex align-items-start">Welcome to Curacel Auto</span>
     </div>
     <br>
-    <!-- <div class="row mx-3 justify-content-between">
+    <div class="row mx-3 justify-content-between">
       <h6 >Active Policies</h6>
       <button class="px-3 view-btn">View all <img src="../assets/arrow_forward_2.png"></button>
     </div>
     <br>
-    <div class="py-2">
+    <!-- <div class="py-2">
         <div class="d-flex flex-row flex-nowrap overflow-auto">
           <div v-for="policy in policies" :key="policy.id">
             <policy-card :policy="policy"></policy-card>
