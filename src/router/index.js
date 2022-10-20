@@ -10,7 +10,7 @@ import BuyPolicy from '../views/BuyPolicy.vue'
 import InsuranceReview from '../views/InsuranceReview.vue'
 import PaymentType from '../views/PaymentType.vue'
 import CardPayment from '../views/CardPayment.vue'
-
+import ClaimsForm from '../views/claims/ClaimsForm.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -64,6 +64,11 @@ const routes = [
     path: '/cardPayment',
     name: 'cardPayment',
     component: CardPayment
+  },
+  {
+    path: '/claims',
+    name: 'claims',
+    component: ClaimsForm
   },
 ]
 

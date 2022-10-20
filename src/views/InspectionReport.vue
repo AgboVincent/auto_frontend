@@ -56,7 +56,6 @@
                                 </b-col>                     
                             
                                 <b-col>
-                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ damage.prediction }}</h5>
                                     <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">
                                         {{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
                                 </b-col>
@@ -79,7 +78,6 @@
                                 </b-col>        
                                 
                                 <b-col>
-                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ damage.prediction }}</h5>
                                     <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
                                 </b-col>
                             </b-row> 
@@ -101,7 +99,6 @@
                                 </b-col>        
                                 
                                 <b-col>
-                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ damage.prediction }}</h5>
                                     <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
                                 </b-col>
                             </b-row>
@@ -122,7 +119,6 @@
                                 </b-col>
                                 
                                 <b-col>
-                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ damage.prediction }}</h5>
                                     <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
                                 </b-col>
                             </b-row>

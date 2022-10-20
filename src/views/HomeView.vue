@@ -35,6 +35,7 @@
                     subtitleOne="Submit your claim in 5 easy"
                     subtitleTwo="steps."
                     color="#F5EDFF"
+                    @click="$router.push('/claims')"
     >
     </card-component>
   </div>
@@ -65,7 +66,7 @@ export default {
         getPolicies() {
             this.preEvaluation.getPolicies()
             .then(response =>{
-                //this.policies = response.data;
+                this.policies = response.data;
                 console.log(response.data);
             })
             .catch(e =>{

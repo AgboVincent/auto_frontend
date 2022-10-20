@@ -17,4 +17,8 @@ export default class PreEvaulation{
     getPolicies = () => {
         return Axios.get('new/policies');
     }
+
+    mlValidate = (data) => {
+        return Axios.post('validate/detect', data);
+    }
 }

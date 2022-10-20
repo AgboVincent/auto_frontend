@@ -61,8 +61,9 @@ import BackButton from "@/components/BackButton.vue";
 import CameraComponent from "@/components/Camera.vue";
 import VideoComponent from "@/components/Video.vue";
 import MlService from "@/services/ml.js"
-import Loading from '../components/Loading.vue';
+import Loading from '@/components/PredictionLoader.vue';
 import FileUpload from '@/services/img_upload.js';
+import PreEvaluation from '@/services/pre_evaluation.js';
 export default {
     name: "UploadOptions",
     components: {
@@ -96,6 +97,7 @@ export default {
             videoPath: null,
             predictions: {},
             fileUpload: new FileUpload(),
+            preEvaluation: new PreEvaluation(),
         }
     },
     watch: {
@@ -156,7 +158,7 @@ export default {
             if(this.frontPath === null || this.rearPath === null || 
             this.leftPath === null || this.rightPath === null) return;
             this.showLoading = true;
-            this.mlService.detect(this.images)
+            this.preEvaluation.mlValidate(this.images)
             .then(resp=> {
                 this.mlPredictions(resp.data)
                 this.fileUpload.updateData(resp.data)
