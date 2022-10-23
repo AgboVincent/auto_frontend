@@ -21,4 +21,8 @@ export default class PreEvaulation{
     mlValidate = (data) => {
         return Axios.post('validate/detect', data);
     }
+
+    chosePolicy = (data) => {
+        return Axios.post('policy/select', data);
+    }
 }

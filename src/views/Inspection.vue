@@ -13,6 +13,12 @@
                         <input v-model="data.name" placeholder="Fullname" type="text" class="form-control" 
                         aria-label="Sizing example input" id="validationDefault01" required>
                     </div>
+
+                     <div class="input-group input-group-md py-3">
+                        <input v-model="data.phone" placeholder="Phone Number" type="text" class="form-control" 
+                        aria-label="Sizing example input"  id="validationDefault02" required>
+                    </div>
+
                     <div class="input-group input-group-md py-3">
                         <input v-model="data.email" placeholder="Email address" type="text" class="form-control" 
                         aria-label="Sizing example input"  id="validationDefault02" required>
@@ -25,10 +31,15 @@
                         </select>
                     </div>
 
-                    <!-- <div class="input-group input-group-md mb-3">
-                            <input v-model="data.manufacturer" placeholder="Enter Manufacturer" type="text" class="form-control"
+                    <div class="input-group input-group-md mb-3">
+                            <input v-model="data.vehicle_regno" placeholder="Enter Vehicle reg No" type="text" class="form-control"
                              aria-label="Sizing example input" id="validationDefault06" required >
-                    </div> -->
+                    </div>
+
+                    <div class="input-group input-group-md mb-3">
+                            <input v-model="data.engine_no" placeholder="Enter Vehicle Engine No" type="text" class="form-control"
+                             aria-label="Sizing example input" id="validationDefault06" required >
+                    </div>
 
                     <div class="input-group mb-3">
                         <select v-model="data.year" class="custom-select" id="validationDefault04" required>
@@ -49,14 +60,6 @@
                              aria-label="Sizing example input" id="validationDefault06" required >
                     </div>
                     
-                    <!-- <div class="input-group mb-3">
-                        <select v-model="data.status" class="custom-select" id="validationDefault07" required>
-                            <option :value="data.id" disabled>Vehicle status</option>
-                            <option value="Sever Damage">Sever Damage</option>
-                            <option value="Fair Damage">Fair Damage</option>
-                            <option value="Mid level damage">Mid level Damage</option>
-                        </select>
-                    </div> -->
                     
                     <div class="input-group mb-3">
                         <select v-model="data.color" class="custom-select" id="validationDefault08" required>
@@ -102,7 +105,6 @@ export default {
     },
     watch:{
         brand(){
-              console.log(this.brand)
             if(this.brand){
                 this.preEvaluation.getVehicleModel(this.brand)
                 .then(response =>{
@@ -120,7 +122,6 @@ export default {
         submitVehicleDetails() {
             this.showLoading = true;
             this.data.manufacturer = this.data.brand;
-            this.data.status = "non";
             this.preEvaluation.submitVehicleDetails(this.data)
             .then(response => {
                 localStorage.id = response.data;
@@ -147,6 +148,11 @@ export default {
         .catch(e => {
             console.log(e)
         });  
+
+        if(localStorage.getItem('carData')){
+            this.data = JSON.parse(localStorage.getItem('carData'));
+            this.brand = this.data.brand;
+        }
 
     }
     

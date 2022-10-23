@@ -3,7 +3,7 @@
     <header-component title="Dashboard"></header-component>
     <br>
     <div class="px-3">
-      <h4 style="color: #030124;" class="d-flex align-items-start">Hello there,</h4> 
+      <h5 style="color: #030124;" class="d-flex align-items-start">Hello there, <img height="20px" src="../assets/waving_hand.png" ></h5> 
       <span class="d-flex align-items-start">Welcome to Curacel Auto</span>
     </div>
     <br>
@@ -27,6 +27,16 @@
                     subtitleThree="a policy ."
                     color="#DEEFFF"
                     @click="$router.push('/getStarted')"
+    >
+    </card-component>
+    <br>
+    <card-component leadingIcon="card_payment.png"
+                    title="Purchase Policy"
+                    subtitleOne="Click here to purchase or"
+                    subtitleTwo="renew your policy "
+                    subtitleThree="after admin approval"
+                    color="#F3F5FD"
+                    @click="$router.push('/makePayment')"
     >
     </card-component>
     <br>

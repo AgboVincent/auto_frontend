@@ -6,7 +6,7 @@
         </h3>
         <br>
         <p style="fontSize:14px; color:#00000" class="text-center">{{text}}</p>
-        <img height="20px" src="../assets/small_logo_new.png">
+        <img height="30px" src="../assets/small_logo_new.png">
  
     </div>
 </template>
@@ -29,8 +29,8 @@ export default {
         },
         waitText(){
             setTimeout(()=>{
-                   this.text = "Your predictions is around the corner"
-               },30000) 
+                   this.text = "Your predictions resulsts is around the corner"
+               },20000) 
         }
     },
     mounted(){

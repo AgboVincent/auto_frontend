@@ -1,5 +1,6 @@
 <template>
     <div>
+         <loading v-if="showLoading"/>
         <header-component title="Vehicle Inspection"></header-component>
         <div class="col">
             <back-button></back-button>
@@ -39,7 +40,7 @@
                 </b-col>
             </b-card>
             <br>
-            <button v-if="policy" @click="makePayment()" class="mt-3 py-2 col-md-3 purchase-btn">Pay NGN {{ formatAmount(policy.amount) }}</button>
+            <button v-if="policy" @click="submitAction()" class="mt-3 py-2 col-md-3 purchase-btn">Submit</button>
         </div>  
 
     </div>
@@ -50,18 +51,32 @@
 import HeaderComponent from '@/components/Header.vue'
 import BackButton from "@/components/BackButton.vue";
 import PageDescription from "@/components/PageDescription.vue";
+import PreEvaluation from '@/services/pre_evaluation.js';
+import Loading from '@/components/Loading.vue';
 export default {
     name:"InsuranceReview",
     components:{
         HeaderComponent,
         BackButton,
         PageDescription,
+        Loading
     },
     data() {
         return {
             carData: null,
-            policy: null          
+            policy: null,
+            preEvaluation: new PreEvaluation(),
+            showLoading: false          
         }
+    },
+    computed: {
+        policyData() {
+            return{
+                id: localStorage.id,
+                policy_id: this.policy.id,
+                policy: this.policy.plan
+            }
+        },
     },
     methods: {
         capitalizeFirst(string){
@@ -70,28 +85,19 @@ export default {
         formatAmount(amount){
             return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },
-        makePayment() {
-        this.$launchFlutterwave({
-            tx_ref: Date.now(),
-            amount: this.policy.amount,
-            currency: 'NGN',
-            payment_options: 'card,mobilemoney,ussd',
-            customer: {
-            email: this.carData.email,
-            phonenumber: this.carData.phone,
-            name: this.carData.name
-            },
-            acceptMpesaPayment: false,
-            callback: function(data) {
-            // specified callback function
-            console.log(data)
-            },
-            customizations: {
-            title: 'My store',
-            description: 'Payment for items in cart',
-            logo: 'https://assets.piedpiper.com/logo.png'
-            }
-        })
+        
+        submitAction(){
+            this.showLoading = true;
+            this.preEvaluation.chosePolicy(this.policyData)
+            .then(resp=> {
+                console.log(resp)
+                this.$router.push('/policySuccess').catch(() => {});          
+            })
+            .catch(error=>{
+               console.log(error)
+            })
+            .finally(()=>{this.showLoading = false});
+
         }
     },
     mounted(){

@@ -8,8 +8,8 @@ import UploadOptions from '../views/UploadOptions.vue'
 import InspectionReport from '../views/InspectionReport.vue'
 import BuyPolicy from '../views/BuyPolicy.vue'
 import InsuranceReview from '../views/InsuranceReview.vue'
-import PaymentType from '../views/PaymentType.vue'
-import CardPayment from '../views/CardPayment.vue'
+import MakePayment from '../views/MakePayment.vue'
+import PolicySuccess from '../views/PolicySuccess.vue'
 import ClaimsForm from '../views/claims/ClaimsForm.vue'
 Vue.use(VueRouter)
 
@@ -56,14 +56,14 @@ const routes = [
     component: InsuranceReview
   },
   {
-    path: '/paymentType',
-    name: 'paymentType',
-    component: PaymentType
+    path: '/makePayment',
+    name: 'makePayment',
+    component: MakePayment
   },
   {
-    path: '/cardPayment',
-    name: 'cardPayment',
-    component: CardPayment
+    path: '/policySuccess',
+    name: 'policySuccess',
+    component: PolicySuccess
   },
   {
     path: '/claims',

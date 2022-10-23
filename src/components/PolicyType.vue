@@ -22,7 +22,7 @@
                 </div>
                 <br>
                 <h5 class=" view d-flex align-items-start">View more details</h5>
-                <button @click="reviewPolicy()" class="mt-3 py-2 col-md-3 purchase-btn">Purchase policy</button>
+                <button @click="reviewPolicy()" class="mt-3 py-2 col-md-3 purchase-btn">Choose policy</button>
             </div>
         </div>       
     </b-card>
@@ -56,6 +56,7 @@ export default {
              this.data.amount = this.policy.amount;
              this.data.plan = this.policy.name;
              this.data.duration = this.policy.payment_duration;
+             this.data.id = this.policy.id;
              localStorage.setItem('policy', JSON.stringify(this.data));
             this.$router.push('/insuranceReview');
         },

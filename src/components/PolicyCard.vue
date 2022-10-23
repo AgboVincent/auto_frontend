@@ -14,13 +14,13 @@
              <hr class="">
              <b-row>
                  <b-col>
-                     <span style="font-size:14px" class="d-flex align-items-start">Policy ends</span>
-                    <h6 style="font-size:14px" class="d-flex align-items-start">{{ lastDay }}</h6>
+                     <span style="font-size:14px" class="d-flex align-items-start">Payment Interval</span>
+                    <h6 style="font-size:14px" class="d-flex align-items-start">{{ policy.payment_duration }}</h6>
                  </b-col>
-                 <b-col>
+                 <!-- <b-col>
                      <span style="font-size:14px; width:90px" class="d-flex align-items-start">Next Payment</span>
                      <h6 style="font-size:14px" class="d-flex align-items-start">{{ firstDay }}</h6>
-                 </b-col>
+                 </b-col> -->
              </b-row>
             </div>
         </b-card>
@@ -36,17 +36,17 @@
         data(){
             return{
                 firstDay: null,
-                lastDay: null
+                lastDay: null,
 
             }
         },
-        mounted(){
-            var date = new Date();
-            this.firstDay = new Date(date.getFullYear(), date.getMonth()+1, 1).toDateString();
-            this.lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).toDateString();
-        console.log(this.firstDay);
-        console.log(this.lastDay);
-        }
+        // mounted(){
+        //     var date = new Date();
+        //     this.firstDay = new Date(date.getFullYear(), date.getMonth()+1, 1).toDateString();
+        //     this.lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).toDateString();
+        // console.log(this.firstDay);
+        // console.log(this.lastDay);
+        // }
     }
 </script>
 
