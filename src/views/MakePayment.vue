@@ -1,5 +1,6 @@
 <template>
     <div>
+         <loading v-if="showLoading"/>
         <header-component title="Purchase Policy"></header-component>
         <div class="col">
             <back-button></back-button>
@@ -24,13 +25,16 @@ import BackButton from "@/components/BackButton.vue";
 import PageDescription from "@/components/PageDescription.vue";
 import CustomButton from "../components/CustomButton.vue";
 import PreEvaluation from '@/services/pre_evaluation.js';
+import Loading from '@/components/Loading.vue';
+import {showError, showSuccess} from "@/helpers/alerts";
 export default {
     name:"MakePayment",
     components: {
         HeaderComponent,
         BackButton,
         PageDescription,
-        CustomButton
+        CustomButton,
+        Loading
     },
     data() {
         return {
@@ -44,7 +48,24 @@ export default {
     },
     methods: {
         verifyEmail(){
-            this.makePayment();
+            this.showLoading = true;
+            this.preEvaluation.getUserPolicyStatus(this.email) 
+            .then(response =>{
+                console.log(response)
+                if(response.data.evaluation_status === "Approved"){
+                    this.makePayment();
+                }
+                else if(response.data.evaluation_status === "Pending"){
+                    showSuccess('Your submitted data is currently being processed');
+                }
+                else if (response.data.evaluation_status === "Rejected"){
+                    showSuccess('Your policy has been rejected please submit another request');
+                }
+            })
+            .catch(e =>{
+               showError('Error', e)
+            })
+             .finally(()=>{this.showLoading = false});
 
         },
         makePayment() {

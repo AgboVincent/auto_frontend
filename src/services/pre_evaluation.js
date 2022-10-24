@@ -25,4 +25,8 @@ export default class PreEvaulation{
     chosePolicy = (data) => {
         return Axios.post('policy/select', data);
     }
+
+    getUserPolicyStatus = (email) => {
+        return Axios.get(`user/${email}`);
+    }
 }
