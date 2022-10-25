@@ -130,8 +130,10 @@ export default {
                 this.$router.push('/inspectionSteps').catch(() => {})
             })
             .catch(e => {
-                console.log(e)
-                showError('Error', e.response.data.error)
+                if(e.response.data.error.email[0] === "The email has already been taken."){
+                    this.$router.push('/inspectionSteps').catch(() => {});
+                }
+                else showError('Error', e.response.data.error)
             })
             .finally(()=>{this.showLoading = false})
             

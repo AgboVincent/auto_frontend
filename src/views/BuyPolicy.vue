@@ -4,7 +4,7 @@
         <div class="col">
             <back-button></back-button>
             <page-description title="Buy Policy"
-                              subtitle="Text on purchase your policy">
+                              subtitle="Select the policy you would like to buy">
             </page-description>
             <div v-for="policy in policies" :key="policy.id" class="mb-3">
                 <policy-type :policy = policy></policy-type>

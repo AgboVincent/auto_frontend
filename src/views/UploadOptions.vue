@@ -11,6 +11,7 @@
             <header-component title="Vehicle Inspection"></header-component>
             <div class="col">
                 <back-button></back-button>
+                 <span  class="font-weight-light d-flex align-items-start text-wrap">Click each box to capture</span>
                 <b-card class="card-style mb-3"  @click="openVideo = true">
                     <div class="row px-3">
                         <input v-model="videoUrl" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">

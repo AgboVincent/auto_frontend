@@ -53,7 +53,6 @@ export default {
             fetch(url)
                 .then(res => res.blob())
                 .then(blob => {
-                    console.log(blob)
                     formData.append("file", blob, "filename.jpg");
                     formData.append('id', localStorage.id);
                     formData.append('part', this.pictureType);

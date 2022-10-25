@@ -4,7 +4,7 @@
         <div class="col">
             <back-button></back-button>
             <page-description title="Vehicle Inspection Report"
-                              subtitle="Text Summary on inspection report.">
+                              subtitle="View your vehicle inspection report.">
             </page-description>
             <b-card>
                 <b-col v-if="carData">

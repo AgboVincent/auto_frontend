@@ -29,7 +29,7 @@ export default {
         },
         waitText(){
             setTimeout(()=>{
-                   this.text = "Your predictions resulsts is around the corner"
+                   this.text = "Your predictions results is around the corner"
                },20000) 
         }
     },

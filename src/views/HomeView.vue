@@ -22,9 +22,9 @@
     <br>
     <card-component leadingIcon="inspect_img.png"
                     title="Inspect your vehicle"
-                    subtitleOne="Have your vehicle accessed and"
-                    subtitleTwo="pre-evaluated before purchasing "
-                    subtitleThree="a policy ."
+                    subtitleOne="Have your vehicle accessed"
+                    subtitleTwo="and pre-evaluated before "
+                    subtitleThree="purchasing a policy ."
                     color="#DEEFFF"
                     @click="$router.push('/getStarted')"
     >

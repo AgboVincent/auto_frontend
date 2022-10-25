@@ -2,7 +2,7 @@
     <div>
         <div class="mb-4">
             <h5  class="title d-flex align-items-start">{{title}}</h5> 
-            <span  class="font-weight-light d-flex align-items-start text-wrap">{{subtitle}}</span>
+            <span  class="font-weight-light d-flex align-items-start text-wrap  text-justify">{{subtitle}}</span>
         </div>
     </div>
 </template>
