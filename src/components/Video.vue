@@ -3,6 +3,7 @@
         <loading v-if="showLoading"/>
         <div  id="main_container">
             <video id="video" ref="video"  playsinline autoplay loop> Can't load video :(</video>
+            <span>{{videoTime}}:0:0</span>
             <button id="btn-record" @click="takeVideo()">{{btnText}}</button>
         </div>
    </div> 
@@ -24,7 +25,8 @@ export default {
             mediaRecorder: null,
             blobsRecorded: null,
             btnText: null,
-            showLoading: false
+            showLoading: false,
+            videoTime: 0
         }
 
     },
@@ -60,7 +62,13 @@ export default {
             }
             this.mediaRecorder = new MediaRecorder(window.stream, {mimeType: 'video/webm;codecs=vp9,opus'});
             this.mediaRecorder.start();
-            this.mediaRecorder.ondataavailable = this.recordVideo;          
+            this.mediaRecorder.ondataavailable = this.recordVideo; 
+            setInterval(()=>{
+                   this.videoTime = Math.round(this.video.currentTime);
+                   if(this.videoTime == 15){
+                       this.stopRecording();
+                   }
+            },1000)        
         },
 
         recordVideo(event){
