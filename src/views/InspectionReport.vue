@@ -40,91 +40,91 @@
             </b-card>
             <br>
             <b-card>
-                <b-col>
-                    <b-col>
-                        <b-card class="shadow-sm mb-3" border-variant="light">
-                            <div class="mb-3">
-                                <nav class="container-fluid-nav navbar navbar-light bg-light">
-                                    <h4 class="title mt-2">FRONT VIEW</h4>
-                                </nav>
-                            </div>
-                            <b-row v-for="damage in frontView" 
-                                        :key="damage.id" class="justify-content-between mb-3"> 
-                                <b-col>
-                                    <h5  class="d-flex good align-items-start">{{damage.part}}
-                                    </h5>
-                                </b-col>                     
+                
+                <div>
+                    <b-card class="shadow-sm mb-3" border-variant="light">
+                        <div class="mb-3">
+                            <nav class="container-fluid-nav navbar navbar-light bg-light">
+                                <h4 class="title mt-2">FRONT VIEW</h4>
+                            </nav>
+                        </div>
+                        <b-row v-for="damage in frontView" 
+                                    :key="damage.id" class="justify-content-between mb-3"> 
+                            <b-col>
+                                <h5  class="d-flex good align-items-start">{{damage.part}}
+                                </h5>
+                            </b-col>                     
+                        
+                            <b-col>
+                                <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">
+                                    {{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
+                            </b-col>
+                        </b-row>
+                    </b-card>
+                </div>
+
+                <div>
+                    <b-card class="shadow-sm mb-3" border-variant="light">
+                        <div class="mb-3">
+                            <nav class="container-fluid-nav navbar navbar-light bg-light">
+                                <h4 class="title mt-2">REAR VIEW</h4>
+                            </nav>
+                        </div>
+                    
+                        <b-row v-for="damage in rearView" 
+                                    :key="damage.id" class="justify-content-between mb-3">
+                            <b-col>
+                                <h5 class="good d-flex align-items-start">{{ damage.part }}</h5>
+                            </b-col>        
                             
-                                <b-col>
-                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">
-                                        {{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
-                                </b-col>
-                            </b-row>
-                        </b-card>
-                    </b-col>
+                            <b-col>
+                                <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
+                            </b-col>
+                        </b-row> 
+                    </b-card>                   
+                </div>
 
-                    <b-col>
-                        <b-card class="shadow-sm mb-3" border-variant="light">
-                            <div class="mb-3">
-                                <nav class="container-fluid-nav navbar navbar-light bg-light">
-                                    <h4 class="title mt-2">REAR VIEW</h4>
-                                </nav>
-                            </div>
-                        
-                            <b-row v-for="damage in rearView" 
-                                        :key="damage.id" class="justify-content-between mb-3">
-                                <b-col>
-                                    <h5 class="good d-flex align-items-start">{{ damage.part }}</h5>
-                                </b-col>        
-                                
-                                <b-col>
-                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
-                                </b-col>
-                            </b-row> 
-                        </b-card>                   
-                    </b-col>
+                <div>
+                    <b-card class="shadow-sm mb-3" border-variant="light">            
+                        <div class="mb-3">
+                            <nav class="container-fluid-nav navbar navbar-light bg-light">
+                                <h4 class="title mt-2">RIGHT VIEW</h4>
+                            </nav>
+                        </div>
+                    
+                        <b-row v-for="damage in rightView" 
+                                    :key="damage.id" class="justify-content-between mb-3">
+                            <b-col>
+                                <h5 class="good d-flex align-items-start">{{ damage.part }}</h5>
+                            </b-col>        
+                            
+                            <b-col>
+                                <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
+                            </b-col>
+                        </b-row>
+                    </b-card>
+                </div>
 
-                    <b-col>
-                        <b-card class="shadow-sm mb-3" border-variant="light">            
-                            <div class="mb-3">
-                                <nav class="container-fluid-nav navbar navbar-light bg-light">
-                                    <h4 class="title mt-2">RIGHT VIEW</h4>
-                                </nav>
-                            </div>
-                        
-                            <b-row v-for="damage in rightView" 
-                                        :key="damage.id" class="justify-content-between mb-3">
-                                <b-col>
-                                    <h5 class="good d-flex align-items-start">{{ damage.part }}</h5>
-                                </b-col>        
-                                
-                                <b-col>
-                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
-                                </b-col>
-                            </b-row>
-                        </b-card>
-                    </b-col>
-
-                    <b-col>
-                        <b-card class="shadow-sm mb-3" border-variant="light">                       
-                            <div class="mb-3">
-                                <nav class="container-fluid-nav navbar navbar-light bg-light">
-                                    <h4 class="title mt-2">LEFT VIEW</h4>
-                                </nav>
-                            </div>    
-                            <b-row v-for="damage in leftView" 
-                                        :key="damage.id" class="justify-content-between mb-3">
-                                <b-col>
-                                    <h5 class="good d-flex align-items-start">{{ damage.part }}</h5>
-                                </b-col>
-                                
-                                <b-col>
-                                    <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
-                                </b-col>
-                            </b-row>
-                        </b-card>
-                    </b-col>
-                </b-col>
+                <div>
+                    <b-card class="shadow-sm mb-3" border-variant="light">                       
+                        <div class="mb-3">
+                            <nav class="container-fluid-nav navbar navbar-light bg-light">
+                                <h4 class="title mt-2">LEFT VIEW</h4>
+                            </nav>
+                        </div>    
+                        <b-row v-for="damage in leftView" 
+                                    :key="damage.id" class="justify-content-between mb-3">
+                            <b-col>
+                                <h5 class="good d-flex align-items-start">{{ damage.part }}</h5>
+                            </b-col>
+                            
+                            <b-col>
+                                <h5 class="d-flex justify-content-end good" :style="{color:damage.color}">{{ (+damage.damage).toFixed(2)*100 }}% damage</h5>
+                            </b-col>
+                        </b-row>
+                    </b-card>
+                </div>
+                
             </b-card>
             <custom-button @click="$router.push('/buyPolicy')" title="Continue"></custom-button>
         </div>
