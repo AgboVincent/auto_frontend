@@ -91,6 +91,9 @@ export default {
             this.preEvaluation.chosePolicy(this.policyData)
             .then(resp=> {
                 console.log(resp)
+                localStorage.setItem('image', JSON.stringify({}));
+                localStorage.setItem('images', JSON.stringify({}));
+                localStorage.setItem('videoUrl', JSON.stringify(false));
                 this.$router.push('/policySuccess').catch(() => {});          
             })
             .catch(error=>{

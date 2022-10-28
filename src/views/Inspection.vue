@@ -4,7 +4,7 @@
         <header-component title="Vehicle Inspection"></header-component>
         <div class="col">
             <back-button></back-button>
-              <div class="my-4">
+              <div class="my-0">
                     <h5  class="title d-flex align-items-start">Tell us a bit about your vehicle</h5> 
                     <span class="font-weight-light d-flex align-items-start">Please provide accurate information.</span>
               </div>
@@ -130,10 +130,18 @@ export default {
                 this.$router.push('/inspectionSteps').catch(() => {})
             })
             .catch(e => {
-                if(e.response.data.error.email[0] === "The email has already been taken."){
-                    this.$router.push('/inspectionSteps').catch(() => {});
+                if(e.response.data.error.email){
+                    if(e.response.data.error.email[0] === "The email has already been taken."){
+                        this.$router.push('/inspectionSteps').catch(() => {});
+                    }
+                    else{
+                        showError('Error', e.response.data.error);
+                    }
                 }
-                else showError('Error', e.response.data.error)
+                
+                else {
+                    showError('Error', e.response.data.error);
+                }
             })
             .finally(()=>{this.showLoading = false})
             

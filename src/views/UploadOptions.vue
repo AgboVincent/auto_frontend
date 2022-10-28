@@ -20,31 +20,31 @@
                 </b-card>
                 <b-card class="card-style mb-3" @click="handleType('engine')">
                     <div class="row px-3">
-                        <input v-model="imageUrl1" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <input v-model="image.imageUrl1" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
                         <h6>Capture your Engine</h6>
                     </div>
                 </b-card>
                 <b-card class="card-style mb-3" @click="handleType('front')">
                     <div class="row px-3">
-                        <input v-model="imageUrl2" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <input v-model="image.imageUrl2" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
                         <h6>Capture the front view of your vehicle</h6>
                     </div>
                 </b-card>
                 <b-card class="card-style mb-3" @click="handleType('rear')">
                     <div class="row px-3">
-                        <input v-model="imageUrl3" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <input v-model="image.imageUrl3" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
                         <h6>Capture the rear view of your vehicle</h6>
                     </div>
                 </b-card>
                 <b-card class="card-style mb-3" @click="handleType('right')">
                     <div class="row px-3">
-                        <input v-model="imageUrl4" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <input v-model="image.imageUrl4" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
                         <h6>Capture the right side of your vehicle</h6>
                     </div>
                 </b-card>
                 <b-card class="card-style mb-3" @click="handleType('left')">
                     <div class="row px-3">
-                        <input v-model="imageUrl5" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <input v-model="image.imageUrl5" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
                         <h6>Capture the left side of your vehicle</h6>
                     </div>
                 </b-card>
@@ -79,26 +79,18 @@ export default {
         return{
             openCamera: false,
             openVideo: false,
-            imageUrl1: false,
-            imageUrl2: null,
-            imageUrl3: null,
-            imageUrl4: null,
-            imageUrl5: null,
             videoUrl: null,
             valEmit: null,
             pictureType: null,
             video: null, 
             mlService: new MlService(),
             showLoading: false,
-            leftPath: null,
-            rightPath: null,
-            frontPath: null,
-            rearPath: null,
-            enginePath: null,
-            videoPath: null,
             predictions: {},
             fileUpload: new FileUpload(),
             preEvaluation: new PreEvaluation(),
+            image: {},
+            path: {},
+            images: {}
         }
     },
     watch: {
@@ -106,47 +98,51 @@ export default {
             this.handleEmits();
         },
     },
-    computed: {
-        images() {
-            return{
-                image_data1: this.mlService.s3Url+this.frontPath,   //front
-                image_data2: this.mlService.s3Url+this.rearPath,   //rear
-                image_data3: this.mlService.s3Url+this.rightPath,   //right
-                image_data4: this.mlService.s3Url+this.leftPath    //left
-            }
-        },
-    },
     methods: {
         handleEmits() {
             if(this.valEmit.image == "imageUrl1"){
-                this.imageUrl1 = true;
+                this.image.imageUrl1 = true;
+                localStorage.setItem('image', JSON.stringify(this.image));
                 this.openCamera = false;
-                this.enginePath = this.valEmit.url;
+                this.path.enginePath = this.valEmit.url;      
             }
             else if(this.valEmit.image == "imageUrl2"){
-                this.imageUrl2 = true;
+                this.image.imageUrl2 = true;
+                localStorage.setItem('image', JSON.stringify(this.image));
                 this.openCamera = false;
-                this.frontPath = this.valEmit.url;
+                this.path.frontPath = this.valEmit.url;
+                this.images.image_data1 = this.mlService.s3Url+this.path.frontPath;
+                localStorage.setItem('images', JSON.stringify(this.images));
             }
              else if(this.valEmit.image == "imageUrl3"){
-                this.imageUrl3 = true;
+                this.image.imageUrl3 = true;
+                localStorage.setItem('image', JSON.stringify(this.image));
                 this.openCamera = false;
-                this.rearPath = this.valEmit.url;
+                this.path.rearPath = this.valEmit.url;
+                this.images.image_data2 = this.mlService.s3Url+this.path.rearPath;
+                localStorage.setItem('images', JSON.stringify(this.images));
             }
              else if(this.valEmit.image == "imageUrl4"){
-                this.imageUrl4 = true;
+                this.image.imageUrl4 = true;
+                localStorage.setItem('image', JSON.stringify(this.image));
                 this.openCamera = false;
-                this.rightPath = this.valEmit.url;
+                this.path.rightPath = this.valEmit.url;
+                this.images.image_data3 = this.mlService.s3Url+this.path.rightPath;
+                localStorage.setItem('images', JSON.stringify(this.images));
             }
              else if(this.valEmit.image == "imageUrl5"){
-                this.imageUrl5 = true;
+                this.image.imageUrl5 = true;
+                localStorage.setItem('image', JSON.stringify(this.image));
                 this.openCamera = false;
-                this.leftPath = this.valEmit.url
+                this.path.leftPath = this.valEmit.url
+                this.images.image_data4 = this.mlService.s3Url+this.path.leftPath;
+                localStorage.setItem('images', JSON.stringify(this.images));
             }
             else if(this.valEmit.type == "video"){
                 this.videoUrl = true;
+                localStorage.setItem('videoUrl', JSON.stringify(this.videoUrl));
                 this.openVideo = false;
-                this.videoPath = this.valEmit.url;
+                this.path.videoPath = this.valEmit.url;
                 this.valEmit = {};
             }
         },
@@ -156,8 +152,9 @@ export default {
             this.valEmit = {};
         },
         validateUploads(){
-            if(this.frontPath === null || this.rearPath === null || 
-            this.leftPath === null || this.rightPath === null) return;
+            if(this.image.imageUrl1=== false || this.image.imageUrl2 ===false || 
+            this.image.imageUrl3 === false  || this.image.imageUrl4 === false 
+            || this.image.imageUrl5 === false || this.videoUrl === false) return;
             this.showLoading = true;
             this.preEvaluation.mlValidate(this.images)
             .then(resp=> {
@@ -244,6 +241,20 @@ export default {
         }
         
     },
+    mounted(){
+        if(localStorage.getItem('image')){
+           this.image = JSON.parse(localStorage.getItem('image'));
+        }
+        if(localStorage.getItem('videoUrl')){
+           this.videoUrl = JSON.parse(localStorage.getItem('videoUrl'));
+        }
+        console.log(localStorage.getItem('images'));
+        if(localStorage.getItem('images')){
+           this.images = JSON.parse(localStorage.getItem('images'));
+        }
+        
+        
+    }
     
 }
 </script>

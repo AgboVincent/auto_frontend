@@ -26,7 +26,8 @@ export default {
             blobsRecorded: null,
             btnText: null,
             showLoading: false,
-            videoTime: 0
+            videoTime: 0,
+            interval: null
         }
 
     },
@@ -63,8 +64,8 @@ export default {
             this.mediaRecorder = new MediaRecorder(window.stream, {mimeType: 'video/webm;codecs=vp9,opus'});
             this.mediaRecorder.start();
             this.mediaRecorder.ondataavailable = this.recordVideo; 
-            setInterval(()=>{
-                   this.videoTime = Math.round(this.video.currentTime);
+            this.interval = setInterval(()=>{
+                   this.videoTime = this.videoTime+1;
                    if(this.videoTime == 15){
                        this.stopRecording();
                    }
@@ -99,6 +100,7 @@ export default {
 
         stopRecording(){
             this.mediaRecorder.stop();
+            clearInterval(this.interval)
             this.showLoading = true;
         }
 

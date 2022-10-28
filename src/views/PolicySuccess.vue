@@ -5,7 +5,7 @@
         <p>The admin will review your details and reach</p>
         <p>out to you via an email sms</p>
         <br>
-        <custom-button @click="$router.go(-7)" title="Continue"></custom-button>
+        <custom-button @click="$router.go(-8)" title="Continue"></custom-button>
     </div>
 </template>
 
