@@ -65,7 +65,7 @@ import MlService from "@/services/ml.js"
 import Loading from '@/components/PredictionLoader.vue';
 import FileUpload from '@/services/img_upload.js';
 import PreEvaluation from '@/services/pre_evaluation.js';
-import {showError, showSuccess} from "@/helpers/alerts";
+import {showError} from "@/helpers/alerts";
 export default {
     name: "UploadOptions",
     components: {
@@ -160,7 +160,6 @@ export default {
             this.preEvaluation.mlValidate(this.images)
             .then(resp=> {
                 let isAutomobile = false;
-                console.log(resp.data);
                 for(let i = 0; i<resp.data.length; i++){
                 if(resp.data[i]['is_expected_automobile'] == false){
                     isAutomobile = true;
@@ -169,15 +168,15 @@ export default {
                 }
                 }
                 if(isAutomobile === true) return;
-                //this.mlPredictions(resp.data)
-                // this.fileUpload.updateData(resp.data)
-                // .then(resp=>{
-                //     console.log(resp.data);
-                // })
-                // .catch(err=>{
-                //     console.log(err);
-                //      showError('Error', err);
-                // })
+                this.mlPredictions(resp.data)
+                this.fileUpload.updateData(resp.data)
+                .then(resp=>{
+                    console.log(resp.data);
+                })
+                .catch(err=>{
+                    console.log(err);
+                     showError('Error', err);
+                })
                 
             })
             .catch(error=>{
