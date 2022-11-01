@@ -169,15 +169,15 @@ export default {
                 }
                 }
                 if(isAutomobile === true) return;
-                this.mlPredictions(resp.data)
-                this.fileUpload.updateData(resp.data)
-                .then(resp=>{
-                    console.log(resp.data);
-                })
-                .catch(err=>{
-                    console.log(err);
-                     showError('Error', err);
-                })
+                //this.mlPredictions(resp.data)
+                // this.fileUpload.updateData(resp.data)
+                // .then(resp=>{
+                //     console.log(resp.data);
+                // })
+                // .catch(err=>{
+                //     console.log(err);
+                //      showError('Error', err);
+                // })
                 
             })
             .catch(error=>{
