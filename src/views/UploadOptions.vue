@@ -160,6 +160,7 @@ export default {
             this.preEvaluation.mlValidate(this.images)
             .then(resp=> {
                 let isAutomobile = false;
+                console.log(resp.data);
                 for(let i = 0; i<resp.data.length; i++){
                 if(resp.data[i]['is_expected_automobile'] == false){
                     isAutomobile = true;
