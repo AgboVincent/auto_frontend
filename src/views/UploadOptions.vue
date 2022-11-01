@@ -163,7 +163,7 @@ export default {
                 for(let i = 0; i<resp.data.length; i++){
                 if(resp.data[i]['is_expected_automobile'] == false){
                     isAutomobile = true;
-                    showError('Error', "You have uploaded an image that is not a vehicle");
+                    showError('Error', "You have uploaded an image that is not a vehicle, Please retake images");
                     break;
                 }
                 }
