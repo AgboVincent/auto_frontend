@@ -65,6 +65,7 @@ import MlService from "@/services/ml.js"
 import Loading from '@/components/PredictionLoader.vue';
 import FileUpload from '@/services/img_upload.js';
 import PreEvaluation from '@/services/pre_evaluation.js';
+import {showError, showSuccess} from "@/helpers/alerts";
 export default {
     name: "UploadOptions",
     components: {
@@ -158,6 +159,15 @@ export default {
             this.showLoading = true;
             this.preEvaluation.mlValidate(this.images)
             .then(resp=> {
+                let isAutomobile = false;
+                for(let i = 0; i<resp.data.length; i++){
+                if(resp.data[i]['is_expected_automobile'] == false){
+                    isAutomobile = true;
+                    showError('Error', "You have uploaded an image that is not a vehicle");
+                    break;
+                }
+                }
+                if(isAutomobile === true) return;
                 this.mlPredictions(resp.data)
                 this.fileUpload.updateData(resp.data)
                 .then(resp=>{
@@ -165,11 +175,13 @@ export default {
                 })
                 .catch(err=>{
                     console.log(err);
+                     showError('Error', err);
                 })
                 
             })
             .catch(error=>{
                console.log(error)
+               showError('Error', error);
             })
             .finally(()=>{this.showLoading = false});
         },
@@ -248,7 +260,6 @@ export default {
         if(localStorage.getItem('videoUrl')){
            this.videoUrl = JSON.parse(localStorage.getItem('videoUrl'));
         }
-        console.log(localStorage.getItem('images'));
         if(localStorage.getItem('images')){
            this.images = JSON.parse(localStorage.getItem('images'));
         }
