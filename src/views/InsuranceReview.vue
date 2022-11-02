@@ -5,7 +5,7 @@
         <div class="col">
             <back-button></back-button>
             <page-description title="Insurance Review"
-                              subtitle="Text on insurance review">
+                              subtitle="Review insurace details before submission">
             </page-description>
             <b-card>
                 <b-col v-if="carData && policy">
