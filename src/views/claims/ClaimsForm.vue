@@ -33,15 +33,15 @@
 
                <div class="col my-3">
                     <label class="d-flex align-items-start">Select accident type</label>
-                    <select  v-model="data.accident_id" class="custom-select" id="validationDefault03" required>
+                    <select @change="accidentName($event)" v-model="data.accident_id" class="custom-select" id="validationDefault03" required>
                         <option :value="data.id" disabled>Accident type</option>
-                        <option v-for="type in types" :key="type.id" :value="type.id">{{type.name}}</option>    
+                        <option v-for="type in types" :key="type.name" :value="type.id">{{type.name}}</option>    
                     </select>
                 </div>
 
                 <div class="col my-3">
                    <label class="d-flex align-items-start">Enter Accicent description</label>
-                    <input v-model="data.descriptions" placeholder="Description" type="text" class="form-control" style="height:80px"
+                    <input v-model="data.description" placeholder="Description" type="text" class="form-control" style="height:80px"
                     aria-label="Sizing example input"  id="validationDefault02" required>
                </div>
 
@@ -76,6 +76,10 @@ export default {
             localStorage.setItem('collectionData', JSON.stringify(this.data)); 
             this.$router.push('/collectionSteps')
         },
+        accidentName($event){
+            const val = $event.target.value;
+            this.data.accident_type = this.types.filter(e => e.id == val);
+        }
     },
     mounted(){
         this.collection.getAccidentTypes()
