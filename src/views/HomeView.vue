@@ -45,9 +45,10 @@
                     subtitleOne="Submit your claim in 5 easy"
                     subtitleTwo="steps."
                     color="#F5EDFF"
-                    @click="$router.push('/claims')"
+                    @click="$router.push('/claimsIntro')"
     >
     </card-component>
+    <br>
   </div>
 </template>
 

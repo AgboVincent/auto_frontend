@@ -10,7 +10,11 @@ import BuyPolicy from '../views/BuyPolicy.vue'
 import InsuranceReview from '../views/InsuranceReview.vue'
 import MakePayment from '../views/MakePayment.vue'
 import PolicySuccess from '../views/PolicySuccess.vue'
+import ClaimsIntro from '../views/claims/ClaimsStepOne.vue'
 import ClaimsForm from '../views/claims/ClaimsForm.vue'
+import CollectionSteps from '../views/claims/CollectionSteps.vue'
+import CollectionsUploads from '../views/claims/CollectionUploads.vue'
+import CollectionReview from '../views/claims/CollectionReview.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -65,10 +69,31 @@ const routes = [
     name: 'policySuccess',
     component: PolicySuccess
   },
+   //collection
+   {
+    path: '/claimsIntro',
+    name: 'claimsIntro',
+    component: ClaimsIntro
+  },
   {
     path: '/claims',
     name: 'claims',
     component: ClaimsForm
+  },
+  {
+    path: '/collectionSteps',
+    name: 'collectionSteps',
+    component: CollectionSteps
+  },
+  {
+    path: '/collectionUploads',
+    name: 'collectionUploads',
+    component: CollectionsUploads
+  },
+  {
+    path: '/collectionReview',
+    name: 'collectionReview',
+    component: CollectionReview
   },
 ]
 
