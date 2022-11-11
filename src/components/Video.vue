@@ -37,7 +37,7 @@ export default {
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video: true //{facingMode: { exact: 'environment' }} 
+                video: {facingMode: { exact: 'environment' }} 
                 , audio: false,
 
             }).then(stream => {
@@ -89,6 +89,7 @@ export default {
                 if(this.type == 'claims'){
                     this.collection.uploadClaims(formData)
                         .then(response =>{
+                            console.log(response.data);
                                 this.$emit('valueEmit', 'video');
                         })
                         .catch(e => {
