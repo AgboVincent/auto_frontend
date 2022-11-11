@@ -15,6 +15,7 @@ import ClaimsForm from '../views/claims/ClaimsForm.vue'
 import CollectionSteps from '../views/claims/CollectionSteps.vue'
 import CollectionsUploads from '../views/claims/CollectionUploads.vue'
 import CollectionReview from '../views/claims/CollectionReview.vue'
+import ClaimsSuccess from '../views/claims/ClaimsSuccess.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -94,6 +95,11 @@ const routes = [
     path: '/collectionReview',
     name: 'collectionReview',
     component: CollectionReview
+  },
+  {
+    path: '/claimsSuccess',
+    name: 'claimsSuccess',
+    component: ClaimsSuccess
   },
 ]
 

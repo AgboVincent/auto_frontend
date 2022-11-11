@@ -67,6 +67,8 @@ export default {
             this.preEvaluation.getUserPolicyStatus(this.email) 
             .then(response =>{
                 console.log(response)
+                localStorage.id = response.data.pre_evaluation_id;
+                localStorage.policy_id = response.data.policy_id;
                 if(response.data.evaluation_status === "Approved"){
                     this.policy = response.data;
                 }

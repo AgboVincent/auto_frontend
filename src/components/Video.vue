@@ -13,14 +13,17 @@
 <script>
 import FileUpload from '@/services/img_upload.js';
 import Loading from './Loading.vue';
+import Collection from '@/services/collection.js';
 export default {
     name: "VideoComponent",
     components: {Loading},
+    props:['type'],
     data(){
         return{
             video: null,
             videoUrl: null,
             fileUpload: new FileUpload(),
+            collection: new Collection(),
             cameraStream: null,
             mediaRecorder: null,
             blobsRecorded: null,
@@ -34,7 +37,7 @@ export default {
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video: {facingMode: { exact: 'environment' }} 
+                video: true //{facingMode: { exact: 'environment' }} 
                 , audio: false,
 
             }).then(stream => {
@@ -83,9 +86,21 @@ export default {
                 formData.append('id', localStorage.id);
                 formData.append('part', 'video');
                 formData.append('type_id', 2);
+                if(this.type == 'claims'){
+                    this.collection.uploadClaims(formData)
+                        .then(response =>{
+                                this.$emit('valueEmit', 'video');
+                        })
+                        .catch(e => {
+                            console.log(e)
+                        })
+                        .finally(()=>{
+                            this.showLoading = false;
+                        });
+                    return;
+                }
                 this.fileUpload.uploadImage(formData)
                 .then(response => {
-                    console.log(response);
                 this.$emit('valueEmit', {
                     type:"video",
                     url: response.data.url

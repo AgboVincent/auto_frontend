@@ -11,6 +11,7 @@
 <script>
 import FileUpload from '@/services/img_upload.js';
 import Loading from './Loading.vue';
+import Collection from '@/services/collection.js';
 export default {
     name: "CameraComponent",
     components: {Loading},
@@ -20,6 +21,7 @@ export default {
             video: null,
             canvas: null,
             fileUpload: new FileUpload(),
+            collection: new Collection(),
             showLoading:false
         }
 
@@ -27,13 +29,12 @@ export default {
     methods: {
         startCapture(){
             navigator.mediaDevices.getUserMedia({
-                video: {facingMode: { exact: 'environment' }} 
+                video: true // {facingMode: { exact: 'environment' }} 
                 , audio: false,
 
             }).then(stream => {
                 this.video.srcObject = stream;
                 this.video.play();
-                console.log(window.stream);
             }).catch(err => {
                 console.log(err);
             })
@@ -46,7 +47,6 @@ export default {
             this.showLoading = true;
             let context = this.canvas.getContext('2d');
             context.drawImage(this.video, 0,0, this.video.videoWidth, this.video.videoHeight);
-            console.log(this.pictureType)
 
             const url =  this.canvas.toDataURL('image/png');
             var formData = new FormData();
@@ -57,6 +57,21 @@ export default {
                     formData.append('id', localStorage.id);
                     formData.append('part', this.pictureType);
                     formData.append('type_id', 1);
+                    if(this.pictureType == 'claims'){
+                        this.collection.uploadClaims(formData)
+                            .then(response =>{
+                                 console.log(response.data);
+                                 this.$emit('valueEmit', 'image');
+                            })
+                            .catch(e => {
+                                console.log(e)
+                            })
+                            .finally(()=>{
+                                this.showLoading = false;
+                            });
+                        
+                        return;
+                    }
                     this.fileUpload.uploadImage(formData)
                     .then(response => {
                         console.log(response);

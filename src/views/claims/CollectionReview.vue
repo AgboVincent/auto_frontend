@@ -1,5 +1,6 @@
 <template>
     <div>
+         <loading v-if="showLoading"/>
          <header-component title="Insurance Claims"></header-component>
          <div class="col">
              <back-button></back-button>
@@ -36,7 +37,7 @@
                    
                 </b-col>
             </b-card>
-            <custom-button type="submit" title="Submit claim"></custom-button>
+            <custom-button @click="submitClaim" type="submit" title="Submit claim"></custom-button>
 
          </div>
     </div>
@@ -48,24 +49,48 @@ import HeaderComponent from '@/components/Header.vue'
 import BackButton from "@/components/BackButton.vue";
 import PageDescription from "@/components/PageDescription.vue";
 import CustomButton from "@/components/CustomButton.vue";
+import Collection from '@/services/collection.js';
+import Loading from '@/components/Loading.vue';
 export default {
     name: "CollectionReview",
     components: {
         HeaderComponent,
         BackButton,
         PageDescription,
-        CustomButton
+        CustomButton,
+        Loading 
     },
     data() {
         return {
-            claimsData: null
-           
+            claimsData: null,
+            collection: new Collection(),
+            showLoading: false,
         }
     },
     methods: {
         capitalizeFirst(string){
             return string.charAt(0).toUpperCase() + string.slice(1)
         },
+        submitClaim(){
+            this.showLoading = true;
+            this.claimsData.id = localStorage.id;
+            this.claimsData.policy_id = localStorage.policy_id;
+            this.collection.submitClaims(this.claimsData)
+                .then(response =>{
+                    console.log(response.data);
+                    localStorage.setItem('imageClaims', false);
+                    localStorage.setItem('videoUrlClaims', false);
+                    localStorage.setItem('collectionData', JSON.stringify({}));
+                    this.$router.push('/claimsSuccess').catch(() => {}); 
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+                .finally(()=>{
+                    this.showLoading = false;
+                });
+
+        }
     },
     mounted(){
          if(localStorage.getItem('collectionData')){
