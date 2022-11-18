@@ -13,9 +13,9 @@
                     aria-label="Sizing example input"  id="validationDefault02" required>
                 </div>  
                  <br>
-                <div style = "width:100%" class="md" v-if="policy">
+                <div style = "width:100%" class="md" v-if="policies">
                     <label class="d-flex align-items-start">Select Policy</label>
-                    <b-card  class="col-md" @click="$router.push('/claims')">
+                    <b-card v-for="policy in policies" :key="policy.id" class="col-md mb-3" @click="policyStatus(policy)">
                         <b-row>
                             <div>
                                 <img src="../../assets/hino.png" >
@@ -25,10 +25,10 @@
                                 <span class="d-flex align-items-start">ABJ8290YY</span>
                             </div>          
                         </b-row>
-                    </b-card>    
+                    </b-card>   
                 </div> 
 
-                <custom-button v-show="!policy" type="submit" title="Continue"></custom-button>
+                <custom-button v-show="!policies" type="submit" title="Continue"></custom-button>
             </form>   
             
         </div>
@@ -56,7 +56,7 @@ export default {
     data() {
         return {
             email: null,
-            policy: null,
+            policies: null,
             preEvaluation: new PreEvaluation(),
             showLoading: false,
         }
@@ -64,17 +64,14 @@ export default {
     methods: {
         verifyUser() {
             this.showLoading = true;
-            this.preEvaluation.getUserPolicyStatus(this.email) 
+            this.preEvaluation.getUserPolicyList(this.email) 
             .then(response =>{
-                console.log(response)
-                localStorage.id = response.data.pre_evaluation_id;
-                localStorage.policy_id = response.data.policy_id;
-                if(response.data.evaluation_status === "Approved"){
-                    this.policy = response.data;
+                if(response.data.length === 0){
+                    showError('Error', "Kindly purchase a policy")
+                    return;
                 }
-                else{
-                    showError('Error', "Your policy has not been approved")
-                }
+                this.policies = response.data;
+                
             })
             .catch(e =>{
                showError('Error', e)
@@ -82,6 +79,17 @@ export default {
              .finally(()=>{this.showLoading = false});
             
         },
+        policyStatus(policy){
+            if(policy.evaluation_status === "Approved"){
+                localStorage.id = policy.pre_evaluation_id;
+                localStorage.policy_id = policy.policy_id;
+                this.$router.push('/claims')               
+            }
+            else{
+                showError('Error', "Your policy has not been approved")
+            }
+
+        }
     },
 }
 </script>

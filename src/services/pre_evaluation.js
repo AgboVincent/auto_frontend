@@ -29,4 +29,8 @@ export default class PreEvaulation{
     getUserPolicyStatus = (email) => {
         return Axios.get(`user/${email}`);
     }
+
+    getUserPolicyList = (email) => {
+        return Axios.get(`policy/list/${email}`);
+    }
 }
