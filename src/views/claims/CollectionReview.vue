@@ -65,6 +65,7 @@ export default {
             claimsData: null,
             collection: new Collection(),
             showLoading: false,
+            quotes: []
         }
     },
     methods: {
@@ -75,12 +76,13 @@ export default {
             this.showLoading = true;
             this.claimsData.id = localStorage.id;
             this.claimsData.policy_id = localStorage.policy_id;
-            this.collection.submitClaims(this.claimsData)
+            this.collection.submitClaims(this.claimsData, this.quotes)
                 .then(response =>{
                     console.log(response.data);
                     localStorage.setItem('imageClaims', false);
                     localStorage.setItem('videoUrlClaims', false);
                     localStorage.setItem('collectionData', JSON.stringify({}));
+                    localStorage.setItem('quotes', JSON.stringify([]));
                     this.$router.push('/claimsSuccess').catch(() => {}); 
                 })
                 .catch(e => {
@@ -97,6 +99,9 @@ export default {
             this.claimsData = JSON.parse(localStorage.getItem('collectionData'));
         }
 
+        if(localStorage.getItem('quotes')){
+            this.quotes = JSON.parse(localStorage.getItem('quotes'));
+        }
     }
 }
 </script>

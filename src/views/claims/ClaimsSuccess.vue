@@ -6,7 +6,7 @@
         <p>The admin will review your claims and reach</p>
         <p>out to you via an email sms</p>
         <br>
-        <custom-button @click="$router.go(-6)" title="Continue"></custom-button>
+        <custom-button @click="$router.go(-6)" title="Okay, Got it"></custom-button>
     </div>
 </template>
 

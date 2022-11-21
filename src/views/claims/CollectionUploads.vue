@@ -88,7 +88,7 @@ export default {
         },
         nextPage(){
             if(this.image.imageUrl == false || this.videoUrl == false)return;
-            this.$router.push('/collectionReview')
+            this.$router.push('/quotes')
         }
     },
     mounted(){

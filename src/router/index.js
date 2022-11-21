@@ -16,6 +16,7 @@ import CollectionSteps from '../views/claims/CollectionSteps.vue'
 import CollectionsUploads from '../views/claims/CollectionUploads.vue'
 import CollectionReview from '../views/claims/CollectionReview.vue'
 import ClaimsSuccess from '../views/claims/ClaimsSuccess.vue'
+import AddQuotes from '../views/claims/AddQuotes.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -90,6 +91,11 @@ const routes = [
     path: '/collectionUploads',
     name: 'collectionUploads',
     component: CollectionsUploads
+  },
+  {
+    path: '/quotes',
+    name: 'addQuotes',
+    component: AddQuotes
   },
   {
     path: '/collectionReview',

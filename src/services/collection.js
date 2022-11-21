@@ -10,9 +10,16 @@ export default class Collection{
         return Axios.post('upload/claims', fileData);
     }
 
-    submitClaims = (claimsData) => {
+    submitClaims = (claimsData, quotes) => {
+        if(this.addQuotes(quotes))
         return Axios.post('submit/claims', claimsData);
     }
 
-    
+    addQuotes = (quotes) => {
+       let quoteData = {
+            id: localStorage.id,
+            quotes: quotes
+        }
+        return Axios.post('add/quotes', quoteData);
+    }
 }
