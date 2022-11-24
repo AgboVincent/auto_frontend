@@ -11,7 +11,7 @@
                     <b-card class="py-2 card-style">
                         <div class="col">
                             <h4 style="color:#FFFFFF" class="d-flex align-items-start">Vehicle Inspection</h4>
-                            <span style="color:#FFFFFF;" class="d-flex align-items-start">Automate your vehicle inspections operations with our AI powered inspection, reduce inspection time and streamline your processes.</span>
+                            <span style="color:#FFFFFF;" class="d-flex align-items-start text-justify">Automate your vehicle inspections operations with our AI powered inspection, reduce inspection time and streamline your processes.</span>
                         </div>
                     </b-card>
                 </div>

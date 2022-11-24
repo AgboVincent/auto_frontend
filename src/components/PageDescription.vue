@@ -23,7 +23,9 @@ export default {
 .title{
     color:#030124;
     font-weight: 500;
-    font-size: 21px;        
+    font-size: 21px;   
+    font-family: 'Outfit';
+    font-style: normal;  
 }
 
 </style>

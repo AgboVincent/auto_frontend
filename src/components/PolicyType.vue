@@ -16,12 +16,11 @@
                 <br>
                 <div v-for="item in policy.items" :key="item.id">
                     <div class="row px-3">
-                        <input class="mb-2 mr-3" v-model="item.is_covered" type="checkbox" aria-label="Checkbox for following text input">
+                        <input class="mb-2 mr-3 policy-item" v-model="item.is_covered" type="checkbox" aria-label="Checkbox for following text input">
                         <h6>{{item.name}}</h6>
                     </div>
                 </div>
                 <br>
-                <h5 class=" view d-flex align-items-start">View more details</h5>
                 <button @click="reviewPolicy()" class="mt-3 py-2 col-md-3 purchase-btn">Choose policy</button>
             </div>
         </div>       
@@ -94,17 +93,18 @@ export default {
     border-radius: 4px;
     background: rgba(26, 26, 255, 0.1);
 }
-.view{
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    text-decoration-line: underline;
-    color: #1A1AFF;
-}
 .purchase-btn{
     background-color: #1A1AFF;
     border-radius: 8px;
     border: 0;
     color: #ffffff;
+}
+.policy-item{
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #030124;
 }
 </style>

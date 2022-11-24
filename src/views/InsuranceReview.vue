@@ -35,7 +35,7 @@
                     </b-row>
                     <b-row class="justify-content-between">
                         <h5 class="title d-flex align-items-start">Amount</h5>
-                        <h4 class="value d-flex align-items-start">NGN {{ formatAmount(policy.amount) }}</h4>
+                        <h4 class="value d-flex align-items-start price">NGN {{ formatAmount(policy.amount) }}</h4>
                     </b-row>
                 </b-col>
             </b-card>
@@ -133,6 +133,13 @@ export default {
     border-radius: 8px;
     border: 0;
     color: #ffffff;
+}
+.price{
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: #030124;
 }
 
 </style>

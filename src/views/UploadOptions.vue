@@ -14,38 +14,38 @@
                  <span  class="font-weight-light d-flex align-items-start text-wrap">Click each box to capture</span>
                 <b-card class="card-style mb-3"  @click="openVideo = true">
                     <div class="row px-3">
-                        <input v-model="videoUrl" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                        <h6>Video recording of your vehicle</h6>
+                        <input v-model="videoUrl" class=" mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <span :class="`${videoUrl ? 'line-stroke' : ''}`">Video recording of your vehicle</span>
                     </div>
                 </b-card>
                 <b-card class="card-style mb-3" @click="handleType('engine')">
                     <div class="row px-3">
-                        <input v-model="image.imageUrl1" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                        <h6>Capture your Engine</h6>
+                        <input v-model="image.imageUrl1" class=" mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <span :class="`${image.imageUrl1 ? 'line-stroke' : ''}`">Capture your Engine</span>
                     </div>
                 </b-card>
                 <b-card class="card-style mb-3" @click="handleType('front')">
                     <div class="row px-3">
-                        <input v-model="image.imageUrl2" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                        <h6>Capture the front view of your vehicle</h6>
+                        <input v-model="image.imageUrl2" class="mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <span :class="`${image.imageUrl2 ? 'line-stroke' : ''}`">Capture the front view of your vehicle</span>
                     </div>
                 </b-card>
                 <b-card class="card-style mb-3" @click="handleType('rear')">
                     <div class="row px-3">
-                        <input v-model="image.imageUrl3" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                        <h6>Capture the rear view of your vehicle</h6>
+                        <input v-model="image.imageUrl3" class=" mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <span :class="`${image.imageUrl3 ? 'line-stroke' : ''}`">Capture the rear view of your vehicle</span>
                     </div>
                 </b-card>
                 <b-card class="card-style mb-3" @click="handleType('right')">
                     <div class="row px-3">
-                        <input v-model="image.imageUrl4" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                        <h6>Capture the right side of your vehicle</h6>
+                        <input v-model="image.imageUrl4" class=" mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <span :class="`${image.imageUrl4 ? 'line-stroke' : ''}`">Capture the right side of your vehicle</span>
                     </div>
                 </b-card>
                 <b-card class="card-style mb-3" @click="handleType('left')">
                     <div class="row px-3">
-                        <input v-model="image.imageUrl5" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                        <h6>Capture the left side of your vehicle</h6>
+                        <input v-model="image.imageUrl5" class=" mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                        <span :class="`${image.imageUrl2 ? 'line-stroke' : ''}`">Capture the left side of your vehicle</span>
                     </div>
                 </b-card>
                 <custom-button @click="validateUploads()" title="Continue"></custom-button> 
@@ -163,6 +163,9 @@ export default {
                 for(let i = 0; i<resp.data.length; i++){
                 if(resp.data[i]['is_expected_automobile'] == false){
                     isAutomobile = true;
+                    this.image = {};
+                    this.path = {};
+                    this.images = {};
                     showError('Error', "You have uploaded an image that is not a vehicle, Please retake images");
                     break;
                 }
@@ -275,5 +278,8 @@ export default {
     height:60px;
     border: 1;
     background: #FFFFFF;
+}
+.line-stroke {
+    text-decoration: line-through;
 }
 </style>

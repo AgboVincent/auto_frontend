@@ -16,14 +16,14 @@
                     </page-description>
                     <b-card class="card-style mb-3"  @click="openVideo = true">
                             <div class="row px-3">
-                                <input v-model="videoUrl" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                                <h6>Video recording of the damaged part</h6>
+                                <input v-model="videoUrl" class=" mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                                <span :class="`${videoUrl ? 'line-stroke' : ''}`">Video recording of the damaged part</span>
                             </div>
                         </b-card>
                         <b-card class="card-style mb-3" @click="openCamera = true">
                             <div class="row px-3">
-                                <input v-model="image.imageUrl" class="mb-2 mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                                <h6>Upload image of the damaged part</h6>
+                                <input v-model="image.imageUrl" class=" mr-3" type="checkbox" aria-label="Checkbox for following text input">
+                                <span :class="`${image.imageUrl ? 'line-stroke' : ''}`">Upload image of the damaged part</span>
                             </div>
                         </b-card>
                         <br>
@@ -43,6 +43,7 @@ import CustomButton from "@/components/CustomButton.vue";
 import CameraComponent from "@/components/Camera.vue";
 import VideoComponent from "@/components/Video.vue";
 import Loading from '@/components/Loading.vue';
+import {showSuccess} from "@/helpers/alerts";
 export default {
     name: "CollectionsUploads",
     components: {
@@ -76,7 +77,8 @@ export default {
                 this.image.imageUrl = true;
                 localStorage.setItem('imageClaims', JSON.stringify(this.image));
                 this.openCamera = false;   
-                this.valEmit = {};  
+                this.valEmit = {}; 
+                showSuccess('image Uploaded successfull') 
             }
             
             else if(this.valEmit == "video"){
@@ -111,5 +113,7 @@ export default {
     text-decoration-line: underline;
     color: #1A1AFF;
 }
-
+.line-stroke {
+    text-decoration: line-through;
+}
 </style>
