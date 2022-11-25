@@ -1,10 +1,10 @@
 <template>
     <div class="div-class">
-        <img height="50px" src="../../assets/success_icon.png">
-        <p>Congratulations</p>
-        <p>Your Claims has been submitted successfully</p>
-        <p>The admin will review your claims and reach</p>
-        <p>out to you via an email sms</p>
+        <img height="60px" src="../../assets/success_icon.png">
+        <p class="title mt-2">Claim submitted successfully</p>
+        <p class="mx-4 text-justify">Congratulations,Your Claims has been submitted successfully
+        The admin will review your claims and reach
+        out to you via an email sms</p>
         <br>
         <custom-button @click="$router.go(-6)" title="Okay, Got it"></custom-button>
     </div>
@@ -31,5 +31,12 @@ export default {
         top: 30%;
         width: 100%;
     }
+    .title{
+    color:#030124;
+    font-weight: 500;
+    font-size: 21px;   
+    font-family: 'Outfit';
+    font-style: normal;  
+}
 
 </style>
