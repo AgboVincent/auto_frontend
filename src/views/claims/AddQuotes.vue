@@ -63,6 +63,7 @@ export default {
             this.quotes.push(this.data);
             localStorage.setItem("quotes", JSON.stringify(this.quotes));
             this.showQuotes = true;
+            this.data = {};
         },
     },
     
