@@ -34,8 +34,6 @@
 </template>
 
 <script>
-import HeaderComponent from '@/components/Header.vue';
-import BackButton from "@/components/BackButton.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import PageDescription from "@/components/PageDescription.vue";
 import DamageTpyes from '@/services/damage_types.js';
