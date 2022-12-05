@@ -22,4 +22,8 @@ export default class Collection{
         }
         return Axios.post('add/quotes', quoteData);
     }
+
+    mlValidateSingleUpload = (data) => {
+        return Axios.post('detect/single', data);
+    }
 }

@@ -62,4 +62,29 @@ export default class DamageTypes{
       "Total Frontal Damage",
       "Total Back Damage"
     ]
+
+
+    allDamages = [
+      "side mirror",
+      "front door",
+      "back door",
+      "tyre",
+      "front windshield",
+      "headlight",
+      "grill",
+      "front fender",
+      "front bumper",
+      "bonnet",
+      "front window",
+      "back window",
+      "back windshield",
+      "back fender",
+      "back bumper",
+      "back light",
+      "trunk",
+      // "dents",
+      // "scratches",
+      // "cracks",
+      // "scrapes"
+    ]
 }

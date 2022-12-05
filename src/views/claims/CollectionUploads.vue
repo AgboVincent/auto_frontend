@@ -20,14 +20,14 @@
                                 <span :class="`${videoUrl ? 'line-stroke' : ''}`">Video recording of the damaged part</span>
                             </div>
                         </b-card>
-                        <b-card class="card-style mb-3" @click="openCamera = true">
+                        <b-card class="card-style mb-3" @click="openCameraFunc()">
                             <div class="row px-3">
                                 <input v-model="image.imageUrl" class=" mr-3" type="checkbox" aria-label="Checkbox for following text input">
                                 <span :class="`${image.imageUrl ? 'line-stroke' : ''}`">Upload image of the damaged part</span>
                             </div>
                         </b-card>
                         <br>
-                        <h5 @click="openCamera = true" class=" view d-flex align-items-start">Upload another image</h5>
+                        <h5 v-if="uploads.length < 4" @click="openCamera = true" class=" view d-flex align-items-start">Upload another image</h5>
                         <custom-button type="submit" title="Continue" @click="nextPage"></custom-button>
                 </div>
         </div>
@@ -42,8 +42,10 @@ import PageDescription from "@/components/PageDescription.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import CameraComponent from "@/components/Camera.vue";
 import VideoComponent from "@/components/Video.vue";
-import Loading from '@/components/Loading.vue';
-import {showSuccess} from "@/helpers/alerts";
+import Loading from '@/components/PredictionLoader.vue';
+import {showSuccess, showError} from "@/helpers/alerts";
+import Collection from '@/services/collection.js';
+import MlService from "@/services/ml.js"
 export default {
     name: "CollectionsUploads",
     components: {
@@ -64,6 +66,11 @@ export default {
             showLoading: false,
             video: null, 
             valEmit: null,
+            collection: new Collection(),
+            uploads: [],
+            mlService: new MlService(),
+            path: null,
+            url: null
         }
     },
     watch: {
@@ -72,11 +79,20 @@ export default {
         },
     },
     methods: {
+        openCameraFunc(){
+            if(this.uploads.length === 4){
+                showSuccess('You cannot upload more than four images') 
+                return;
+            } 
+            this.openCamera = true;
+        },
         handleEmits() {
-            if(this.valEmit == 'image'){
+            if(this.valEmit.image == 'image'){
                 this.image.imageUrl = true;
-                localStorage.setItem('imageClaims', JSON.stringify(this.image));
                 this.openCamera = false;   
+                this.path = this.valEmit.url
+                this.url =  this.mlService.s3Url+this.path;
+                this.uploads.push(this.url)
                 this.valEmit = {}; 
                 showSuccess('image Uploaded successfull') 
             }
@@ -90,7 +106,49 @@ export default {
         },
         nextPage(){
             if(this.image.imageUrl == false || this.videoUrl == false)return;
-            this.$router.push('/quotes')
+            this.validateUploads();
+        },
+        validateUploads() {
+            let data = {}
+            
+            for(let i = 0; i < this.uploads.length; i++){
+                data["image_data" + (i+1)] = this.uploads[i];
+            }
+          
+            this.showLoading = true;
+            this.collection.mlValidateSingleUpload(data)
+                .then(response =>{
+                    console.log(response.data);
+                    let isAutomobile = false;
+                    for(let i = 0; i<response.data.length; i++){
+                    if(response.data[i]['is_expected_automobile'] == false){
+                        isAutomobile = true;
+                        showError('Error', "You have uploaded an image that is not a vehicle, Please retake images");
+                        break;
+                    }
+                }
+                if(isAutomobile === true) return;
+                    this.mlDetection(response.data);
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+                .finally(()=>{
+                    this.showLoading = false;
+                });
+            
+        },
+        mlDetection(data){
+            let output = []
+            for(let i = 0; i < data.length; i++){
+               let results = data[i].damaged_parts.Detected_damages;
+               output.push(results);
+            }
+            this.$router.push({ name: 'damageDetection', 
+                params: {
+                    ml: output
+                }
+            })
         }
     },
     mounted(){

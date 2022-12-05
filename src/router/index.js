@@ -17,6 +17,8 @@ import CollectionsUploads from '../views/claims/CollectionUploads.vue'
 import CollectionReview from '../views/claims/CollectionReview.vue'
 import ClaimsSuccess from '../views/claims/ClaimsSuccess.vue'
 import AddQuotes from '../views/claims/AddQuotes.vue'
+import DamageDetection from '../views/detection/DamageDetection.vue'
+import AddDamage from '../views/detection/AddDamage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -106,6 +108,19 @@ const routes = [
     path: '/claimsSuccess',
     name: 'claimsSuccess',
     component: ClaimsSuccess
+  },
+
+  //detection
+  {
+    path: '/damageDetection',
+    name: 'damageDetection',
+    component: DamageDetection,
+    props: true
+  },
+  {
+    path: '/addDamage',
+    name: 'addDamage',
+    component: AddDamage
   },
 ]
 

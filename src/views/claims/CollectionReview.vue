@@ -76,6 +76,7 @@ export default {
             this.showLoading = true;
             this.claimsData.id = localStorage.id;
             this.claimsData.policy_id = localStorage.policy_id;
+            this.claimsData.damages = JSON.parse(localStorage.getItem('damages'));
             this.collection.submitClaims(this.claimsData, this.quotes)
                 .then(response =>{
                     console.log(response.data);
@@ -83,6 +84,7 @@ export default {
                     localStorage.setItem('videoUrlClaims', false);
                     localStorage.setItem('collectionData', JSON.stringify({}));
                     localStorage.setItem('quotes', JSON.stringify([]));
+                    localStorage.setItem('damages', JSON.stringify([]));
                     this.$router.push('/claimsSuccess').catch(() => {}); 
                 })
                 .catch(e => {

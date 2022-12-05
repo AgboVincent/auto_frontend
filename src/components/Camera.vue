@@ -61,7 +61,10 @@ export default {
                         this.collection.uploadClaims(formData)
                             .then(response =>{
                                  console.log(response.data);
-                                 this.$emit('valueEmit', 'image');
+                                 this.$emit('valueEmit', {
+                                    image:"image",
+                                    url: response.data.url
+                                });
                             })
                             .catch(e => {
                                 console.log(e)
