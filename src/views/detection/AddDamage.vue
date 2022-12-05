@@ -40,8 +40,6 @@ import DamageTpyes from '@/services/damage_types.js';
 export default {
     name:"AddDamageModal",
     components: {
-         HeaderComponent,
-         BackButton,
          PageDescription,
          CustomButton,
     },
