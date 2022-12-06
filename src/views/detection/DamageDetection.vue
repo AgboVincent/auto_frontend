@@ -88,7 +88,7 @@ export default {
     },
     methods: {
         nextPage() {
-            if(this.detectedDamages == []){
+            if(this.detectedDamages.length === 0){
                 showSuccess('Please add the damaged part');
                 return; 
             }
