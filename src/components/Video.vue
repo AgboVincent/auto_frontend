@@ -69,7 +69,7 @@ export default {
             this.mediaRecorder.ondataavailable = this.recordVideo; 
             this.interval = setInterval(()=>{
                    this.videoTime = this.videoTime+1;
-                   if(this.videoTime == 15){
+                   if(this.videoTime == 30){
                        this.stopRecording();
                    }
             },1000)        

@@ -93,6 +93,7 @@ export default {
                 this.path = this.valEmit.url
                 this.url =  this.mlService.s3Url+this.path;
                 this.uploads.push(this.url)
+                localStorage.setItem('imageClaims', JSON.stringify(this.image.imageUrl));
                 this.valEmit = {}; 
                 showSuccess('image Uploaded successfull') 
             }

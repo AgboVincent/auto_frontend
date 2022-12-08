@@ -16,7 +16,9 @@
                  </b-row>
              </b-card>
              <br>
-
+            <b-card v-if="detectedDamages.length === 0">
+               <h5 class="title d-flex align-items-start mb-3">No damage was detected, kindly add the damaged part</h5>
+            </b-card>
             <b-card class="mb-3">
                 <h5 class="title d-flex align-items-start mb-3">Detected vehicle parts</h5>
                 <b-row v-for="(data, index) in detectedDamages" :key="data.id">

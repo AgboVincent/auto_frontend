@@ -16,24 +16,23 @@
                             <h6  class="text-justify mt-1">Make sure the environment for capture is well lit.</h6>
                         </div>
                     </div>
-                    <br>
-                    <div class="row px-3">
+                    <div class="row px-3 py-2">
                         <div>
                             <img src="../assets/coin.png">
                         </div>
                         <div class="col">
-                            <h6  class="text-justify mt-1">Record the video of your vehicle in the well-lit environment.</h6>
+                            <h6  class="text-justify mt-1">Record the video of your vehicle starting from the VIN</h6>
                         </div>
                     </div>
-                    <div class="row px-3 py-3">
+                    <div class="row px-3 py-2">
                         <div>
                             <img src="../assets/coin.png">
                         </div>
                         <div class="col">
-                            <h6 class="text-justify mt-1">The Video should not be longer than 15 seconds</h6>
+                            <h6 class="text-justify mt-1">The Video should not be longer than 30 seconds</h6>
                         </div>
                     </div>
-                     <div class="row px-3 py-3">
+                     <div class="row px-3 py-2">
                         <div>
                             <img src="../assets/coin.png">
                         </div>
@@ -41,7 +40,7 @@
                             <h6 class="text-justify mt-1">Capture image of your vehicle’s engine</h6>
                         </div>
                     </div>
-                    <div class="row px-3 py-3">
+                    <div class="row px-3 py-2">
                         <div>
                             <img src="../assets/coin.png">
                         </div>

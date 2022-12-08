@@ -14,9 +14,10 @@
             </b-row>
             <div v-if="details">
                 <br>
+                <h6 class="py-2 d-flex align-items-start">Policy covers</h6>
                 <div v-for="item in policy.items" :key="item.id">
                     <div class="row px-3">
-                        <input class="mb-2 mr-3 policy-item" v-model="item.is_covered" type="checkbox" aria-label="Checkbox for following text input">
+                        <input class="mb-2 mr-3 policy-item" v-model="item.is_covered" type="checkbox" aria-label="Checkbox for following text input" @click="read($event)">
                         <h6>{{item.name}}</h6>
                     </div>
                 </div>
@@ -61,6 +62,9 @@ export default {
         },
         formatAmount(amount){
             return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        },
+        read(e){
+            e.preventDefault();
         }
     },
     
