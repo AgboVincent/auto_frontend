@@ -38,7 +38,6 @@ export default {
         getPolicies() {
             this.preEvaluation.getPolicies()
             .then(response =>{
-                console.log(response.data);
                 this.policies = response.data;
             })
             .catch(e =>{

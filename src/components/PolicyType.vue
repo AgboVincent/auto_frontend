@@ -1,5 +1,5 @@
 <template>
-    <b-card>
+    <b-card @click="showDetails()">
         <div class="col">
             <page-description :title="policy.name"
                               :subtitle="policy.description">
@@ -9,8 +9,8 @@
                     <h4 class="price pr-1">NGN {{formatAmount(policy.amount)}}</h4>
                     <h6 class="duration">/ month</h6>
                 </div>
-                <button v-if="details"  class="details-btn" @click="showDetails()">Details <img src="../assets/arrow_up.png"></button>
-                <button v-if="!details" class="details-btn2" @click="showDetails()">Details <img src="../assets/arrow_down.png"></button>
+                <button v-if="details"  class="details-btn" @click="detail = true">Details <img src="../assets/arrow_up.png"></button>
+                <button v-if="!details" class="details-btn2" @click="detail = false">Details <img src="../assets/arrow_down.png"></button>
             </b-row>
             <div v-if="details">
                 <br>
