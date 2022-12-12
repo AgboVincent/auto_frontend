@@ -1,5 +1,6 @@
 <template>
     <div>
+         <loading v-if="showLoading"/>
         <header-component title="Vehicle Inspection"></header-component>
         <div class="col">
             <back-button></back-button>
@@ -126,7 +127,7 @@
                 </div>
                 
             </b-card>
-            <custom-button @click="$router.push('/buyPolicy')" title="Continue"></custom-button>
+            <custom-button @click="submitDamages()" title="Continue"></custom-button>
         </div>
     </div>
 </template>
@@ -138,13 +139,16 @@ import CustomButton from "@/components/CustomButton.vue";
 import BackButton from "@/components/BackButton.vue";
 import PageDescription from "@/components/PageDescription.vue";
 import DamageTpyes from '@/services/damage_types.js';
+import Loading from '@/components/Loading.vue';
+import PreEvaluation from '@/services/pre_evaluation.js';
 export default {
     name:"InspectionReport",
     components: {
         HeaderComponent,
         CustomButton,
         BackButton,
-        PageDescription
+        PageDescription,
+        Loading
     },
     props: {
         front: { type: Array, default: null },
@@ -162,7 +166,10 @@ export default {
             frontView: [],
             rearView: [],
             rightView: [],
-            leftView: []
+            leftView: [],
+            damages: {},
+            showLoading: false,
+            preEvaluation: new PreEvaluation(),
         
         }
     },
@@ -279,12 +286,44 @@ export default {
            
             
         },
+
+        submitDamages(){
+            this.showLoading = true;
+            this.damages.id = localStorage.id;
+            this.preEvaluation.detectedDamages(this.damages)
+            .then(resp=> {
+                console.log(resp)
+                localStorage.setItem('front', JSON.stringify([]));
+                localStorage.setItem('rear', JSON.stringify([]));
+                localStorage.setItem('left', JSON.stringify([]));
+                localStorage.setItem('right', JSON.stringify([]));
+                this.damages = {}
+                this.$router.push('/buyPolicy').catch(() => {});          
+            })
+            .catch(error=>{
+               console.log(error)
+            })
+            .finally(()=>{this.showLoading = false});
+
+        }
     },
     mounted(){
         if(localStorage.getItem('carData')){
             this.carData = JSON.parse(localStorage.getItem('carData'));
         }
         this.detectFront();
+        if(localStorage.getItem('front')){
+           this.damages.front = JSON.parse(localStorage.getItem('front'));
+        }
+        if(localStorage.getItem('rear')){
+            this.damages.rear = JSON.parse(localStorage.getItem('rear'));
+        }
+        if(localStorage.getItem('left')){
+            this.damages.left = JSON.parse(localStorage.getItem('left'));
+        }
+        if(localStorage.getItem('right')){
+            this.damages.right = JSON.parse(localStorage.getItem('right'));
+        }
     }
     
 }

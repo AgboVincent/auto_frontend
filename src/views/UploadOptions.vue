@@ -193,6 +193,7 @@ export default {
             let frontDamages = data[0].damaged_parts.Detected_damages;
             let frontScores = data[0].damaged_parts.scores;
             let frontResult = [];
+            localStorage.setItem("front", JSON.stringify(frontDamages));
 
             for(let i = 0; i < frontDamages.length; i++){
                frontResult.push(
@@ -207,6 +208,7 @@ export default {
             let rearDamages = data[1].damaged_parts.Detected_damages;
             let rearScores = data[1].damaged_parts.scores;
             let rearResult = [];
+            localStorage.setItem("rear", JSON.stringify(rearDamages));
 
             for(let i = 0; i < rearDamages.length; i++){
                rearResult.push(
@@ -221,6 +223,7 @@ export default {
             let rightDamages = data[2].damaged_parts.Detected_damages;
             let rightScores = data[2].damaged_parts.scores;
             let rightResult = [];
+            localStorage.setItem("right", JSON.stringify(rightDamages));
 
             for(let i = 0; i < rightDamages.length; i++){
                rightResult.push(
@@ -235,6 +238,7 @@ export default {
             let leftDamages = data[3].damaged_parts.Detected_damages;
             let leftScores = data[3].damaged_parts.scores;
             let leftResult = [];
+            localStorage.setItem("left", JSON.stringify(leftDamages));
 
             for(let i = 0; i < leftDamages.length; i++){
                leftResult.push(

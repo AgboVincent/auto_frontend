@@ -32,7 +32,7 @@ export default class DamageTypes{
       "back windshield",
       "back fender",
       "back bumper",
-      "back light",
+      "backlight",
       "trunk"
     ];
 
@@ -82,9 +82,9 @@ export default class DamageTypes{
       "back bumper",
       "back light",
       "trunk",
-      // "dents",
-      // "scratches",
-      // "cracks",
-      // "scrapes"
+      "dents",
+      "scratches",
+      "cracks",
+      "scrapes"
     ]
 }

@@ -33,4 +33,8 @@ export default class PreEvaulation{
     getUserPolicyList = (email) => {
         return Axios.get(`policy/list/${email}`);
     }
+
+    detectedDamages = (data) => {
+        return Axios.post('detected/damages', data);
+    }
 }
