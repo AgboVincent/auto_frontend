@@ -45,7 +45,7 @@
                 <b-card class="card-style mb-3" @click="handleType('left')">
                     <div class="row px-3">
                         <input v-model="image.imageUrl5" class=" mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                        <span :class="`${image.imageUrl2 ? 'line-stroke' : ''}`">Capture the left side of your vehicle</span>
+                        <span :class="`${image.imageUrl5 ? 'line-stroke' : ''}`">Capture the left side of your vehicle</span>
                     </div>
                 </b-card>
                 <custom-button @click="validateUploads()" title="Continue"></custom-button> 
@@ -180,6 +180,7 @@ export default {
                     console.log(err);
                      showError('Error', err);
                 })
+                localStorage.setItem("vettedUploads", JSON.stringify(this.path));
                 
             })
             .catch(error=>{

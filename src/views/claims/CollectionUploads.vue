@@ -17,7 +17,7 @@
                     <b-card class="card-style mb-3"  @click="openVideo = true">
                             <div class="row px-3">
                                 <input v-model="videoUrl" class=" mr-3" type="checkbox" aria-label="Checkbox for following text input">
-                                <span :class="`${videoUrl ? 'line-stroke' : ''}`">Video recording of the damaged part</span>
+                                <span :class="`${videoUrl ? 'line-stroke' : ''}`">Video recording of the Vehicle</span>
                             </div>
                         </b-card>
                         <b-card class="card-style mb-3" @click="openCameraFunc()">

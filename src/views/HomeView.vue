@@ -9,7 +9,7 @@
     <br>
     <div class="row mx-3 justify-content-between">
       <h6 >Active Policies</h6>
-      <button class="px-3 view-btn">View all <img src="../assets/arrow_forward_2.png"></button>
+      <!-- <button class="px-3 view-btn">View all <img src="../assets/arrow_forward_2.png"></button> -->
     </div>
     <br>
     <div class="py-2">

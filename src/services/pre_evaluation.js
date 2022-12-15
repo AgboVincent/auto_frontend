@@ -37,4 +37,8 @@ export default class PreEvaulation{
     detectedDamages = (data) => {
         return Axios.post('detected/damages', data);
     }
+
+    vettedUploads = (data) => {
+        return Axios.post('uploads/vetted', data);
+    }
 }

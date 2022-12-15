@@ -66,7 +66,8 @@ export default {
             carData: null,
             policy: null,
             preEvaluation: new PreEvaluation(),
-            showLoading: false          
+            showLoading: false,
+            uploads: null          
         }
     },
     computed: {
@@ -94,6 +95,18 @@ export default {
                 localStorage.setItem('image', JSON.stringify({}));
                 localStorage.setItem('images', JSON.stringify({}));
                 localStorage.setItem('videoUrl', JSON.stringify(false));
+                let vettedUploads = {
+                    id: localStorage.id,
+                    uploads: Object.values(this.uploads)
+                }
+                this.preEvaluation.vettedUploads(vettedUploads)
+                .then(response =>{
+                    console.log(response);
+                    localStorage.setItem('vettedUploads', JSON.stringify({}));
+                })
+                .catch(err =>{
+                    console.log(err)
+                })
                 this.$router.push('/policySuccess').catch(() => {});          
             })
             .catch(error=>{
@@ -109,6 +122,9 @@ export default {
         }
         if(localStorage.getItem('policy')){
             this.policy = JSON.parse(localStorage.getItem('policy'));
+        }
+        if(localStorage.getItem('vettedUploads')){
+            this.uploads = JSON.parse(localStorage.getItem('vettedUploads'));
         }
     }
 }
