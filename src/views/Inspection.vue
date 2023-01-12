@@ -15,12 +15,17 @@
                     </div>
 
                      <div class="input-group input-group-md py-3">
-                        <input v-model="data.phone" placeholder="Phone Number" type="text" class="form-control" 
+                        <input v-model="data.phone" placeholder="Phone number" type="text" class="form-control" 
                         aria-label="Sizing example input"  id="validationDefault02" required>
                     </div>
 
                     <div class="input-group input-group-md py-3">
                         <input v-model="data.email" placeholder="Email address" type="text" class="form-control" 
+                        aria-label="Sizing example input"  id="validationDefault02" required>
+                    </div>
+
+                    <div class="input-group input-group-md py-3">
+                        <input v-model="data.address" placeholder="House address" type="text" class="form-control" 
                         aria-label="Sizing example input"  id="validationDefault02" required>
                     </div>
 
@@ -70,6 +75,14 @@
                         <select v-model="data.color" class="custom-select" id="validationDefault08" required>
                             <option :value="data.id" disabled>Color of vehicle</option>
                             <option v-for="color in colors" :key="color.id" :value="color">{{color}}</option>  
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <select v-model="data.usage" class="custom-select" id="validationDefault08" required>
+                            <option :value="data.id" disabled>Use of vehicle</option>
+                            <option value="personal">Personal</option>  
+                            <option value="commercial">Commercial</option>  
                         </select>
                     </div>
                 
