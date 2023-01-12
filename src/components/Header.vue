@@ -1,6 +1,6 @@
 <template>
     <div>
-       <div class="px-3 py-2">
+       <div class="pb-2">
         <nav class="container-fluid-nav navbar navbar-light bg-light">
             <h5 class="d-flex text-center  mt-2">{{title}}</h5>
         </nav>

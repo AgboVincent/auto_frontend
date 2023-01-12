@@ -5,7 +5,7 @@
         <div class="col">
             <back-button></back-button>
               <div class="my-0">
-                    <h5  class="title d-flex align-items-start">Tell us a bit about your vehicle</h5> 
+                    <h5  class="title d-flex align-items-start">Personal Details</h5> 
                     <span class="font-weight-light d-flex align-items-start">Please provide accurate information.</span>
               </div>
                <form @submit.stop.prevent="submitVehicleDetails" class="row g-3 mx-1">
@@ -22,6 +22,11 @@
                     <div class="input-group input-group-md py-3">
                         <input v-model="data.email" placeholder="Email address" type="text" class="form-control" 
                         aria-label="Sizing example input"  id="validationDefault02" required>
+                    </div>
+
+                    <div class="mt-3 mb-1">
+                        <h5  class="title d-flex align-items-start">Vehicle Details</h5> 
+                        <span class="font-weight-light d-flex align-items-start">Please provide accurate information.</span>
                     </div>
                     
                     <div class="input-group mb-3">
